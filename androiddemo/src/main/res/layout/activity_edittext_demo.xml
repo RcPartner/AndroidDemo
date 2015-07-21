@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <!-- 比较常用的xml属性，
+        gravity：文字在空间中的位置，居中，水平居中，垂直居中等
+        textStyle：文字的风格，普通，加粗，斜体
+        singleLine：是否只为单行
+        textSize：文字大小
+        textColor：文字颜色
+        hint：提示文本
+    -->
+    <EditText
+        android:id="@+id/etDemo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:hint="我设置了seterror"
+        android:layout_marginTop="20dp" />
+    <EditText
+        android:id="@+id/etDemo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:hint="我设置了自定义图标的seterror"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/btnClearError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击清除错误提示"/>
+
+</LinearLayout>

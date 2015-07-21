@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rc.androiddemo.adapter.ListViewAdapter;
+import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
 
 import java.io.DataOutputStream;
@@ -78,7 +79,9 @@ public class MainActivity extends Activity {
 
     protected void initData() {
         list = new ArrayList<>();
-        list.add("TextViewDemo");
+        for (int i = 0; i < cArray.length; i++) {
+            list.add(cArray[i].getSimpleName());
+        }
 
         lvDemoAdapter = new ListViewAdapter<String>(list) {
             @Override
@@ -109,7 +112,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    private Class cArray[] = {TextViewDemo.class};
+    private Class cArray[] = {TextViewDemo.class, EditTextDemo.class};
 
     @Override
     protected void onStop() {
