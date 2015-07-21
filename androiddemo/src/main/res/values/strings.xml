@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">AndroidDemo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="underline"><u>引用资源使用下划线</u></string>
+    <string name="pfd_tv_version_text">我是main版本</string>
+
 </resources>

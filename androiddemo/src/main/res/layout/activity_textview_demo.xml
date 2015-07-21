@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <!-- 比较常用的xml属性，
+        gravity：文字在空间中的位置，居中，水平居中，垂直居中等
+        textStyle：文字的风格，普通，加粗，斜体
+        singleLine：是否只为单行
+        textSize：文字大小
+        textColor：文字颜色
+    -->
+    <TextView
+        android:id="@+id/tvDemo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:text="常用的xml属性"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tvDemo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tvDemo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/tvDemo4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/selector_text_color"
+        android:layout_marginTop="20dp" />
+    <!-- 要设置字体颜色selector，必须让控件可点击 clickable="true"-->
+    <TextView
+        android:id="@+id/tvDemo5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/selector_text_color"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:text="xml设置字体颜色selector：按下我由黑色变红色" />
+
+    <TextView
+        android:id="@+id/tvDemo6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/selector_text_color"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:text="@string/underline" />
+
+    <TextView
+        android:id="@+id/tvDemo7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/selector_text_color"
+        android:layout_marginTop="20dp"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/tvDemo8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/selector_text_color"
+        android:layout_marginTop="20dp"
+        android:clickable="true" />
+
+</LinearLayout>
