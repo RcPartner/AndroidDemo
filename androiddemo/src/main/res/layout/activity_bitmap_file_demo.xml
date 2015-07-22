@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="引用原名资源" />
+
+        <ImageView
+            style="@style/bfa_iv"
+            android:src="@drawable/ic_bitmap_file" />
+
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="引用别名资源" />
+
+        <ImageView
+            style="@style/bfa_iv"
+            android:src="@drawable/b_ic_bitmap_file_alias" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="抗锯齿" />
+
+        <ImageView
+            style="@style/bfa_iv"
+            android:src="@drawable/b_ic_bitmap_file_antialias_true" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="不抗锯齿" />
+
+        <ImageView
+            style="@style/bfa_iv"
+            android:src="@drawable/b_ic_bitmap_file_antialias_false" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="抖动处理" />
+
+        <ImageView
+            style="@style/bfa_iv"
+            android:src="@drawable/b_ic_bitmap_file_dither_true" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="不抖动处理" />
+
+        <ImageView
+            style="@style/bfa_iv"
+            android:src="@drawable/b_ic_bitmap_file_dither_true" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="做过滤" />
+
+        <ImageView
+            style="@style/bfa_iv"
+            android:src="@drawable/b_ic_bitmap_file_filter_true" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="不做过滤" />
+
+        <ImageView
+            style="@style/bfa_iv"
+            android:src="@drawable/b_ic_bitmap_file_filter_false" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="disabled" />
+
+        <ImageView
+            style="@style/bfa_iv_tile_mode"
+            android:src="@drawable/b_ic_bitmap_file_tile_mode_disabled" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="clamp" />
+
+        <ImageView
+            style="@style/bfa_iv_tile_mode"
+            android:src="@drawable/b_ic_bitmap_file_tile_mode_clamp" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="repeat" />
+
+        <ImageView
+            style="@style/bfa_iv_tile_mode"
+            android:src="@drawable/b_ic_bitmap_file_tile_mode_repeat" />
+
+        <TextView
+            style="@style/bfa_tv"
+            android:text="mirror" />
+
+        <ImageView
+            style="@style/bfa_iv_tile_mode"
+            android:src="@drawable/b_ic_bitmap_file_tile_mode_mirror" />
+
+    </LinearLayout>
+</ScrollView>

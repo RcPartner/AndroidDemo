@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--用途：1）别名；
+         2）添加额外的属性-->
+<!--<bitmap  -->
+<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--引用      android:src="@[package:]drawable/drawable_resource"-->
+<!--抗锯齿    android:antialias=["true" | "false"]-->
+<!--抖动处理  android:dither=["true" | "false"]-->
+<!--过滤      android:filter=["true" | "false"]-->
+<!--位置      android:gravity=["top" | "bottom" | "left" | "right" | "center_vertical" -->
+<!--| "fill_vertical" | "center_horizontal" | "fill_horizontal" -->
+<!--|"center" | "fill" | "clip_vertical" | "clip_horizontal"]-->
+<!--是否有mipMap android:mipMap=["true" | "false"]-->
+<!--平铺 android:tileMode=["disabled" | "clamp" | "repeat" | "mirror"] />-->
+
+<bitmap
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/ic_bitmap_file"
+    android:tileMode="mirror"
+    />
+

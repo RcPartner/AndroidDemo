@@ -24,9 +24,16 @@
         <activity android:name=".ui.animation.view.tween.RotateDemo" />
         <activity android:name=".ui.animation.view.tween.ScaleDemo" />
         <activity android:name=".ui.animation.view.tween.TranslateDemo" />
-        
+
         <!--评分条-->
         <activity android:name=".ui.ratingbar.RatingBarDemo" />
+
+        <!--Bitmap-->
+        <activity android:name=".resources.drawable.bitmapfile.BitmapFileDemo" />
+        <!--层叠-->
+        <activity android:name=".resources.drawable.layerlist.LayerListDemo" />
+        <!--.9-->
+        <activity android:name=".resources.drawable.ninepatchfile.NinePatchFileDemo" />
 
     </application>
 

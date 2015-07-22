@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rc.androiddemo.adapter.ListViewAdapter;
+import com.rc.androiddemo.resources.drawable.bitmapfile.BitmapFileDemo;
+import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
+import com.rc.androiddemo.resources.drawable.ninepatchfile.NinePatchFileDemo;
 import com.rc.androiddemo.ui.animation.TweenedAnimation;
 import com.rc.androiddemo.ui.animation.view.tween.AlphaDemo;
 import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
@@ -120,7 +123,7 @@ public class MainActivity extends Activity {
 
     private Class cArray[] = {TextViewDemo.class, EditTextDemo.class, TweenedAnimation.class,
             AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class,
-            RatingBarDemo.class};
+            RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class};
 
     @Override
     protected void onStop() {
