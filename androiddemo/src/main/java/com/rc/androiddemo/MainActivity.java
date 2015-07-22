@@ -23,6 +23,7 @@ import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
+import com.rc.androiddemo.ui.webview.WebViewDemo;
 
 import java.io.DataOutputStream;
 import java.util.ArrayList;
@@ -123,7 +124,8 @@ public class MainActivity extends Activity {
 
     private Class cArray[] = {TextViewDemo.class, EditTextDemo.class, TweenedAnimation.class,
             AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class,
-            RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class};
+            RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
+            WebViewDemo.class};
 
     @Override
     protected void onStop() {
