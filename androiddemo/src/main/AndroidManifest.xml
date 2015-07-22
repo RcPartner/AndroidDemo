@@ -28,6 +28,8 @@
         <activity android:name=".ui.ratingbar.RatingBarDemo" />
         <!--webview-->
         <activity android:name=".ui.webview.WebViewDemo" />
+        <!--开关按钮-->
+        <activity android:name=".ui.switchh.SwitchDemo" />
 
 
         <!--Bitmap-->
