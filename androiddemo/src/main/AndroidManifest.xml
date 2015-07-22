@@ -30,6 +30,8 @@
         <activity android:name=".ui.webview.WebViewDemo" />
         <!--开关按钮-->
         <activity android:name=".ui.switchh.SwitchDemo" />
+        <!--浮窗-->
+        <activity android:name=".ui.dialog.AlertDialogDemo" />
 
 
         <!--Bitmap-->
