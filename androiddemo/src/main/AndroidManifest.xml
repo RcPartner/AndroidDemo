@@ -24,6 +24,9 @@
         <activity android:name=".ui.animation.view.tween.RotateDemo" />
         <activity android:name=".ui.animation.view.tween.ScaleDemo" />
         <activity android:name=".ui.animation.view.tween.TranslateDemo" />
+        
+        <!--评分条-->
+        <activity android:name=".ui.ratingbar.RatingBarDemo" />
 
     </application>
 

@@ -18,6 +18,7 @@ import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
 import com.rc.androiddemo.ui.animation.view.tween.ScaleDemo;
 import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
+import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
 
 import java.io.DataOutputStream;
@@ -118,7 +119,8 @@ public class MainActivity extends Activity {
     }
 
     private Class cArray[] = {TextViewDemo.class, EditTextDemo.class, TweenedAnimation.class,
-            AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class};
+            AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class,
+            RatingBarDemo.class};
 
     @Override
     protected void onStop() {
