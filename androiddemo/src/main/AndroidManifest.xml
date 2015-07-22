@@ -13,10 +13,18 @@
             </intent-filter>
         </activity>
 
+        <!--ui-->
         <!--TextView-->
         <activity android:name=".ui.textview.TextViewDemo" />
         <!--EditTextDemo-->
         <activity android:name=".ui.edittext.EditTextDemo" />
+        <!--动画-->
+        <activity android:name=".ui.animation.TweenedAnimation" />
+        <activity android:name=".ui.animation.view.tween.AlphaDemo" />
+        <activity android:name=".ui.animation.view.tween.RotateDemo" />
+        <activity android:name=".ui.animation.view.tween.ScaleDemo" />
+        <activity android:name=".ui.animation.view.tween.TranslateDemo" />
+
     </application>
 
 </manifest>

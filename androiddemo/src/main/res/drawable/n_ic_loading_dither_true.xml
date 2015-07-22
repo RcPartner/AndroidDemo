@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--用途：1）别名；
+         2）添加额外的属性-->
+<!--<nine-patch     -->
+<!--xmlns:android="http://schemas.android.com/apk/res/android"     -->
+<!--android:src="@[package:]drawable/drawable_resource"   -->
+<!--android:dither=["true" | "false"] />-->
+
+<nine-patch
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/n_ic_loading"
+    android:dither="true"
+    />
+

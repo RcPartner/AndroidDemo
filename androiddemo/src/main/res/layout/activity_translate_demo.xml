@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvDemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="渐变动画demo" />
+
+    <TextView
+        android:id="@+id/tvMove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="点我开始移动（使用set+translate标签）" />
+
+    <TextView
+        android:id="@+id/tvMove1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="点我开始移动（使用java代码）" />
+
+    <LinearLayout
+        android:id="@+id/llDemo2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvLeft"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:background="#888888" />
+
+        <TextView
+            android:id="@+id/tvRight"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="我将从右边移出去" />
+
+        <TextView
+            android:id="@+id/tvNew"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="我是新的视图"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvOutOfRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击我红色块将从右边移除并显示新的视图" />
+
+
+</LinearLayout>
