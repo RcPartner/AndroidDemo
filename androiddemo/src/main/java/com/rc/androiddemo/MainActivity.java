@@ -12,19 +12,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rc.androiddemo.adapter.ListViewAdapter;
+import com.rc.androiddemo.design.mvpdemo.view.MVPLoginDemo;
 import com.rc.androiddemo.resources.drawable.bitmapfile.BitmapFileDemo;
 import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
 import com.rc.androiddemo.resources.drawable.ninepatchfile.NinePatchFileDemo;
 import com.rc.androiddemo.ui.animation.TweenedAnimation;
 import com.rc.androiddemo.ui.animation.view.tween.AlphaDemo;
+import com.rc.androiddemo.ui.animation.view.tween.AnimationDemo;
 import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
 import com.rc.androiddemo.ui.animation.view.tween.ScaleDemo;
 import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
 import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
+import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
 import com.rc.androiddemo.ui.switchh.SwitchDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
+import com.rc.androiddemo.ui.touchevent.TouchEventDemo;
 import com.rc.androiddemo.ui.webview.WebViewDemo;
 
 import java.io.DataOutputStream;
@@ -101,6 +105,14 @@ public class MainActivity extends Activity {
                 TextView textView;
                 if (convertView == null) {
                     textView = new TextView(MainActivity.this);
+                    ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(
+                            ViewGroup.MarginLayoutParams.MATCH_PARENT, ViewGroup.MarginLayoutParams
+                            .MATCH_PARENT);
+                    lp.setMargins(getResources().getDimensionPixelOffset(R.dimen.item_mar_left),
+                            getResources().getDimensionPixelOffset(R.dimen.item_mar_top),
+                            getResources().getDimensionPixelOffset(R.dimen.item_mar_left),
+                            getResources().getDimensionPixelOffset(R.dimen.item_mar_top));
+                    textView.setLayoutParams(lp);
                     textView.setTextSize(18);
                     convertView = textView;
                 } else {
@@ -127,7 +139,8 @@ public class MainActivity extends Activity {
     private Class cArray[] = {TextViewDemo.class, EditTextDemo.class, TweenedAnimation.class,
             AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class,
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
-            WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class};
+            WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
+            AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class};
 
     @Override
     protected void onStop() {
