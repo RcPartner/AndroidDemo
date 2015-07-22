@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -105,14 +106,11 @@ public class MainActivity extends Activity {
                 TextView textView;
                 if (convertView == null) {
                     textView = new TextView(MainActivity.this);
-                    ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(
-                            ViewGroup.MarginLayoutParams.MATCH_PARENT, ViewGroup.MarginLayoutParams
-                            .MATCH_PARENT);
-                    lp.setMargins(getResources().getDimensionPixelOffset(R.dimen.item_mar_left),
+                    textView.setPadding(getResources().getDimensionPixelOffset(R.dimen.item_mar_left),
                             getResources().getDimensionPixelOffset(R.dimen.item_mar_top),
                             getResources().getDimensionPixelOffset(R.dimen.item_mar_left),
                             getResources().getDimensionPixelOffset(R.dimen.item_mar_top));
-                    textView.setLayoutParams(lp);
+                    textView.setGravity(Gravity.CENTER);
                     textView.setTextSize(18);
                     convertView = textView;
                 } else {

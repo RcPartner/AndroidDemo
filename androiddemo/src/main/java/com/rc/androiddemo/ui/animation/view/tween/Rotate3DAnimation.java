@@ -10,7 +10,7 @@ import android.view.animation.Transformation;
  * User: WuRuiqiang(263454190@qq.com)
  * Date: 2015-03-31
  * Time: 11:13
- * Description£º
+ * Description:
  */
 public class Rotate3DAnimation extends Animation {
 
