@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -12,21 +13,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rc.androiddemo.adapter.ListViewAdapter;
+import com.rc.androiddemo.design.mvpdemo.view.MVPLoginDemo;
 import com.rc.androiddemo.resources.drawable.bitmapfile.BitmapFileDemo;
 import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
 import com.rc.androiddemo.resources.drawable.ninepatchfile.NinePatchFileDemo;
 import com.rc.androiddemo.ui.ViewGroupEventDemo;
 import com.rc.androiddemo.ui.animation.TweenedAnimation;
 import com.rc.androiddemo.ui.animation.view.tween.AlphaDemo;
+import com.rc.androiddemo.ui.animation.view.tween.AnimationDemo;
 import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
 import com.rc.androiddemo.ui.animation.view.tween.ScaleDemo;
 import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
 import com.rc.androiddemo.ui.custom.TwoScrollViewDemo;
 import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
+import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
 import com.rc.androiddemo.ui.switchh.SwitchDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
+import com.rc.androiddemo.ui.touchevent.TouchEventDemo;
 import com.rc.androiddemo.ui.webview.WebViewDemo;
 
 import java.io.DataOutputStream;
@@ -129,7 +134,8 @@ public class MainActivity extends Activity {
     private Class cArray[] = {TextViewDemo.class, EditTextDemo.class, TweenedAnimation.class,
             AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class,
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
-            WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, TwoScrollViewDemo.class, ViewGroupEventDemo.class};
+            WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
+            AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class};
 
     @Override
     protected void onStop() {

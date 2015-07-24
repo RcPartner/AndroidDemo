@@ -42,6 +42,15 @@
         <activity android:name=".resources.drawable.layerlist.LayerListDemo" />
         <!--.9-->
         <activity android:name=".resources.drawable.ninepatchfile.NinePatchFileDemo" />
+        <!-- 触摸事件-->
+        <activity android:name=".ui.touchevent.TouchEventDemo" />
+        <!-- MVP模式-->
+        <activity android:name=".design.mvpdemo.view.MVPLoginDemo" />
+        <!-- 动画-->
+        <activity android:name=".ui.animation.view.tween.AnimationDemo" />
+        <!-- dialogfragment弹窗-->
+        <activity android:name=".ui.dialog.DialogFragmentDemo" />
+        <!-- -->
 
         <activity android:name=".ui.ViewGroupEventDemo" />
 

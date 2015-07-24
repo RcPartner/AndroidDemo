@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View1 Intercept"/>
+
+        <Switch
+            android:id="@+id/sIntercept"
+            style="@style/touch_event_switch"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View1 Event"/>
+
+        <Switch
+            android:id="@+id/sEvent"
+            style="@style/touch_event_switch"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View2 Intercept"/>
+
+        <Switch
+            android:id="@+id/sIntercept2"
+            style="@style/touch_event_switch"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View2 Event"/>
+
+        <Switch
+            android:id="@+id/sEvent2"
+            style="@style/touch_event_switch"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="View3 Event"/>
+
+        <Switch
+            android:id="@+id/sEvent3"
+            style="@style/touch_event_switch"/>
+    </LinearLayout>
+
+    <com.rc.androiddemo.ui.touchevent.CustomLinearLayout
+        android:id="@+id/cllView1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:padding="50dp"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:background="@color/material_blue_grey_900">
+
+        <com.rc.androiddemo.ui.touchevent.CustomLinearLayout
+            android:id="@+id/cllView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="30dp"
+            android:orientation="vertical"
+            android:background="@android:color/holo_red_light">
+
+            <com.rc.androiddemo.ui.touchevent.CustomTextView
+                android:id="@+id/ctvView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@android:color/white"/>
+        </com.rc.androiddemo.ui.touchevent.CustomLinearLayout>
+    </com.rc.androiddemo.ui.touchevent.CustomLinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
