@@ -33,6 +33,8 @@
         <!--浮窗-->
         <activity android:name=".ui.dialog.AlertDialogDemo" />
 
+        <activity android:name=".ui.custom.TwoScrollViewDemo" />
+
 
         <!--Bitmap-->
         <activity android:name=".resources.drawable.bitmapfile.BitmapFileDemo" />
@@ -40,6 +42,8 @@
         <activity android:name=".resources.drawable.layerlist.LayerListDemo" />
         <!--.9-->
         <activity android:name=".resources.drawable.ninepatchfile.NinePatchFileDemo" />
+
+        <activity android:name=".ui.ViewGroupEventDemo" />
 
     </application>
 

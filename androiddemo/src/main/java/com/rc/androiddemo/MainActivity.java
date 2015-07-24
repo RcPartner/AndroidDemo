@@ -15,11 +15,13 @@ import com.rc.androiddemo.adapter.ListViewAdapter;
 import com.rc.androiddemo.resources.drawable.bitmapfile.BitmapFileDemo;
 import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
 import com.rc.androiddemo.resources.drawable.ninepatchfile.NinePatchFileDemo;
+import com.rc.androiddemo.ui.ViewGroupEventDemo;
 import com.rc.androiddemo.ui.animation.TweenedAnimation;
 import com.rc.androiddemo.ui.animation.view.tween.AlphaDemo;
 import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
 import com.rc.androiddemo.ui.animation.view.tween.ScaleDemo;
 import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
+import com.rc.androiddemo.ui.custom.TwoScrollViewDemo;
 import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
@@ -127,7 +129,7 @@ public class MainActivity extends Activity {
     private Class cArray[] = {TextViewDemo.class, EditTextDemo.class, TweenedAnimation.class,
             AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class,
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
-            WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class};
+            WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, TwoScrollViewDemo.class, ViewGroupEventDemo.class};
 
     @Override
     protected void onStop() {
