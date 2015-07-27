@@ -13,11 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rc.androiddemo.adapter.ListViewAdapter;
+import com.rc.androiddemo.components.activity.FragmentTabHostDemo;
 import com.rc.androiddemo.design.mvpdemo.view.MVPLoginDemo;
 import com.rc.androiddemo.resources.drawable.bitmapfile.BitmapFileDemo;
 import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
 import com.rc.androiddemo.resources.drawable.ninepatchfile.NinePatchFileDemo;
-import com.rc.androiddemo.ui.ViewGroupEventDemo;
 import com.rc.androiddemo.ui.animation.TweenedAnimation;
 import com.rc.androiddemo.ui.animation.view.tween.AlphaDemo;
 import com.rc.androiddemo.ui.animation.view.tween.AnimationDemo;
@@ -29,6 +29,7 @@ import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
+import com.rc.androiddemo.ui.recyclerview.RecyclerViewDemo;
 import com.rc.androiddemo.ui.switchh.SwitchDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
 import com.rc.androiddemo.ui.touchevent.TouchEventDemo;
@@ -108,6 +109,11 @@ public class MainActivity extends Activity {
                 TextView textView;
                 if (convertView == null) {
                     textView = new TextView(MainActivity.this);
+                    textView.setPadding(getResources().getDimensionPixelOffset(R.dimen.item_mar_left),
+                            getResources().getDimensionPixelOffset(R.dimen.item_mar_top),
+                            getResources().getDimensionPixelOffset(R.dimen.item_mar_left),
+                            getResources().getDimensionPixelOffset(R.dimen.item_mar_top));
+                    textView.setGravity(Gravity.CENTER);
                     textView.setTextSize(18);
                     convertView = textView;
                 } else {
@@ -135,7 +141,8 @@ public class MainActivity extends Activity {
             AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class,
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
-            AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class};
+            AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, TwoScrollViewDemo.class,
+            com.rc.androiddemo.ui.alpha.AlphaDemo.class, RecyclerViewDemo.class, FragmentTabHostDemo.class};
 
     @Override
     protected void onStop() {
