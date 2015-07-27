@@ -58,7 +58,7 @@
 
         <activity android:name=".ui.recyclerview.RecyclerViewDemo"/>
 
-        <activity android:name=".components.activity.FragmentActivityDemo"/>
+        <activity android:name=".components.activity.FragmentTabHostDemo"/>
 
     </application>
 
