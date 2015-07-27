@@ -23,7 +23,7 @@ public class RcListDemo extends Activity {
 
     private RecyclerView.LayoutManager layoutManager;
 
-    private List<String> list;
+    protected List<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
