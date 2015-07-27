@@ -29,6 +29,7 @@ import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
+import com.rc.androiddemo.ui.recyclerview.RcGridDemo;
 import com.rc.androiddemo.ui.recyclerview.RcListDemo;
 import com.rc.androiddemo.ui.recyclerview.RecyclerViewDemo;
 import com.rc.androiddemo.ui.switchh.SwitchDemo;
@@ -144,7 +145,7 @@ public class MainActivity extends Activity {
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, TwoScrollViewDemo.class,
             com.rc.androiddemo.ui.alpha.AlphaDemo.class, RecyclerViewDemo.class, FragmentTabHostDemo.class,
-            RcListDemo.class};
+            RcListDemo.class, RcGridDemo.class};
 
     @Override
     protected void onStop() {

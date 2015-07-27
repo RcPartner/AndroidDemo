@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class RcListDemo extends Activity {
 
-    private RecyclerView rcList;
+    protected RecyclerView rcList;
 
     private RcListAdapter rcListAdapter;
 
