@@ -54,11 +54,12 @@
 
         <activity android:name=".ui.ViewGroupEventDemo" />
 
-        <activity android:name=".ui.alpha.AlphaDemo"/>
+        <activity android:name=".ui.alpha.AlphaDemo" />
 
-        <activity android:name=".ui.recyclerview.RecyclerViewDemo"/>
+        <activity android:name=".ui.recyclerview.RecyclerViewDemo" />
+        <activity android:name=".ui.recyclerview.RcListDemo" />
 
-        <activity android:name=".components.activity.FragmentTabHostDemo"/>
+        <activity android:name=".components.activity.FragmentTabHostDemo" />
 
     </application>
 

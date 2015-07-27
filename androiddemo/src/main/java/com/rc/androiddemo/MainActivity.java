@@ -29,6 +29,7 @@ import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
+import com.rc.androiddemo.ui.recyclerview.RcListDemo;
 import com.rc.androiddemo.ui.recyclerview.RecyclerViewDemo;
 import com.rc.androiddemo.ui.switchh.SwitchDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
@@ -142,7 +143,8 @@ public class MainActivity extends Activity {
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, TwoScrollViewDemo.class,
-            com.rc.androiddemo.ui.alpha.AlphaDemo.class, RecyclerViewDemo.class, FragmentTabHostDemo.class};
+            com.rc.androiddemo.ui.alpha.AlphaDemo.class, RecyclerViewDemo.class, FragmentTabHostDemo.class,
+            RcListDemo.class};
 
     @Override
     protected void onStop() {
