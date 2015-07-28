@@ -5,6 +5,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <declare-styleable name="PullToRefreshView">
+        <attr name="header_id" format="reference" />
+        <attr name="content_id" format="reference" />
+    </declare-styleable>
+
     <style name="bfa_tv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

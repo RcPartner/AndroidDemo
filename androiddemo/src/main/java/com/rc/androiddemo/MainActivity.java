@@ -17,6 +17,7 @@ import com.rc.androiddemo.design.mvpdemo.view.MVPLoginDemo;
 import com.rc.androiddemo.resources.drawable.bitmapfile.BitmapFileDemo;
 import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
 import com.rc.androiddemo.resources.drawable.ninepatchfile.NinePatchFileDemo;
+import com.rc.androiddemo.service.ServiceDemo;
 import com.rc.androiddemo.ui.animation.TweenedAnimation;
 import com.rc.androiddemo.ui.animation.view.tween.AlphaDemo;
 import com.rc.androiddemo.ui.animation.view.tween.AnimationDemo;
@@ -26,7 +27,9 @@ import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
 import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
+import com.rc.androiddemo.ui.pulltorefresh.PullToRefreshDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
+import com.rc.androiddemo.ui.scroller.ScrollerDemo;
 import com.rc.androiddemo.ui.switchh.SwitchDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
 import com.rc.androiddemo.ui.touchevent.TouchEventDemo;
@@ -138,7 +141,8 @@ public class MainActivity extends Activity {
             AlphaDemo.class, RotateDemo.class, ScaleDemo.class, TranslateDemo.class,
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
-            AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class};
+            AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, PullToRefreshDemo.class,
+            ScrollerDemo.class, ServiceDemo.class};
 
     @Override
     protected void onStop() {

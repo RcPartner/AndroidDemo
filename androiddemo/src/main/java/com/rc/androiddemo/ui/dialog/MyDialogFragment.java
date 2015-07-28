@@ -28,7 +28,7 @@ public class MyDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_fragment, container, false);
-        view.layout(200, 200, 200, 200);
+        view.layout(500, 500, 1000, 1000);
         return view;
     }
 }
