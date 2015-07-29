@@ -31,9 +31,9 @@ import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
 import com.rc.androiddemo.ui.recyclerview.RcGridDemo;
 import com.rc.androiddemo.ui.recyclerview.RcListDemo;
-import com.rc.androiddemo.ui.recyclerview.RecyclerViewDemo;
 import com.rc.androiddemo.ui.recyclerview.RvStaggeredGridDemo;
 import com.rc.androiddemo.ui.switchh.SwitchDemo;
+import com.rc.androiddemo.ui.textview.AutoCompleteTextViewDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
 import com.rc.androiddemo.ui.touchevent.TouchEventDemo;
 import com.rc.androiddemo.ui.webview.WebViewDemo;
@@ -145,8 +145,8 @@ public class MainActivity extends Activity {
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, TwoScrollViewDemo.class,
-            com.rc.androiddemo.ui.alpha.AlphaDemo.class, RecyclerViewDemo.class, FragmentTabHostDemo.class,
-            RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class};
+            com.rc.androiddemo.ui.alpha.AlphaDemo.class, FragmentTabHostDemo.class,
+            RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class};
 
     @Override
     protected void onStop() {

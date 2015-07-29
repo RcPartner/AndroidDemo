@@ -56,12 +56,13 @@
 
         <activity android:name=".ui.alpha.AlphaDemo" />
 
-        <activity android:name=".ui.recyclerview.RecyclerViewDemo" />
+        <!--RecyclerView-->
         <activity android:name=".ui.recyclerview.RcListDemo" />
         <activity android:name=".ui.recyclerview.RcGridDemo" />
         <activity android:name=".ui.recyclerview.RvStaggeredGridDemo" />
 
         <activity android:name=".components.activity.FragmentTabHostDemo" />
+        <activity android:name=".ui.textview.AutoCompleteTextViewDemo" />
 
     </application>
 
