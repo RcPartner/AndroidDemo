@@ -48,9 +48,7 @@ public class MyService extends Service {
 
     private void stopMyService() {
         Toast.makeText(MyService.this, "stopService", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent("myservice");
-        intent.setPackage(getPackageName());
-        stopService(intent);
+        stopSelf();
     }
 
     private final class Holder extends IMyServiceInterface.Stub {

@@ -198,4 +198,22 @@ public class PullToRefreshView extends ViewGroup {
         Log.v(this.getClass().getSimpleName(), "-------final scroll offset is : " + totalOffsetY);
         invalidate();
     }
+
+    public final class PtrvMarginLayoutParams extends MarginLayoutParams {
+        public PtrvMarginLayoutParams(Context c, AttributeSet attrs) {
+            super(c, attrs);
+        }
+
+        public PtrvMarginLayoutParams(int width, int height) {
+            super(width, height);
+        }
+
+        public PtrvMarginLayoutParams(MarginLayoutParams source) {
+            super(source);
+        }
+
+        public PtrvMarginLayoutParams(LayoutParams source) {
+            super(source);
+        }
+    }
 }

@@ -25,7 +25,6 @@ import com.rc.androiddemo.ui.animation.view.tween.AnimationDemo;
 import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
 import com.rc.androiddemo.ui.animation.view.tween.ScaleDemo;
 import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
-import com.rc.androiddemo.ui.custom.TwoScrollViewDemo;
 import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
@@ -152,8 +151,7 @@ public class MainActivity extends Activity {
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, PullToRefreshDemo.class,
-            ScrollerDemo.class, ServiceDemo.class, TwoScrollViewDemo.class,
-            com.rc.androiddemo.ui.alpha.AlphaDemo.class, FragmentTabHostDemo.class,
+            ScrollerDemo.class, ServiceDemo.class,  FragmentTabHostDemo.class,
             RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class};
 
     @Override
