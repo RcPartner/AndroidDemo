@@ -1,54 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rc.androiddemo" >
+    package="com.rc.androiddemo">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"></category>
+                <action android:name="android.intent.action.MAIN"></action>
             </intent-filter>
         </activity>
 
-        <!-- ui -->
-        <!-- TextView -->
+        <!--ui-->
+        <!--TextView-->
         <activity android:name=".ui.textview.TextViewDemo" />
-        <!-- EditTextDemo -->
+        <!--EditTextDemo-->
         <activity android:name=".ui.edittext.EditTextDemo" />
-        <!-- 动画 -->
+        <!--动画-->
         <activity android:name=".ui.animation.TweenedAnimation" />
         <activity android:name=".ui.animation.view.tween.AlphaDemo" />
         <activity android:name=".ui.animation.view.tween.RotateDemo" />
         <activity android:name=".ui.animation.view.tween.ScaleDemo" />
         <activity android:name=".ui.animation.view.tween.TranslateDemo" />
-        <!-- 评分条 -->
+        <!--评分条-->
         <activity android:name=".ui.ratingbar.RatingBarDemo" />
-        <!-- webview -->
+        <!--webview-->
         <activity android:name=".ui.webview.WebViewDemo" />
-        <!-- 开关按钮 -->
+        <!--开关按钮-->
         <activity android:name=".ui.switchh.SwitchDemo" />
-        <!-- 浮窗 -->
+        <!--浮窗-->
         <activity android:name=".ui.dialog.AlertDialogDemo" />
 
-        <!-- Bitmap -->
+        <activity android:name=".ui.custom.TwoScrollViewDemo" />
+
+
+        <!--Bitmap-->
         <activity android:name=".resources.drawable.bitmapfile.BitmapFileDemo" />
-        <!-- 层叠 -->
+        <!--层叠-->
         <activity android:name=".resources.drawable.layerlist.LayerListDemo" />
-        <!-- .9 -->
+        <!--.9-->
         <activity android:name=".resources.drawable.ninepatchfile.NinePatchFileDemo" />
-        <!-- 触摸事件 -->
+        <!-- 触摸事件-->
         <activity android:name=".ui.touchevent.TouchEventDemo" />
-        <!-- MVP模式 -->
+        <!-- MVP模式-->
         <activity android:name=".design.mvpdemo.view.MVPLoginDemo" />
-        <!-- 动画 -->
+        <!-- 动画-->
         <activity android:name=".ui.animation.view.tween.AnimationDemo" />
-        <!-- dialogfragment弹窗 -->
+        <!-- dialogfragment弹窗-->
         <activity android:name=".ui.dialog.DialogFragmentDemo" />
+        <!-- -->
+
+        <activity android:name=".ui.ViewGroupEventDemo" />
+
+        <activity android:name=".ui.alpha.AlphaDemo" />
+
+        <!--RecyclerView-->
+        <activity android:name=".ui.recyclerview.RcListDemo" />
+        <activity android:name=".ui.recyclerview.RcGridDemo" />
+        <activity android:name=".ui.recyclerview.RvStaggeredGridDemo" />
+
+        <activity android:name=".components.activity.FragmentTabHostDemo" />
+        <activity android:name=".ui.textview.AutoCompleteTextViewDemo" />
         <!-- 拉动刷新 -->
         <activity android:name=".ui.pulltorefresh.PullToRefreshDemo" />
         <!-- 滚动视图 -->

@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rc.androiddemo.adapter.ListViewAdapter;
+import com.rc.androiddemo.components.activity.FragmentTabHostDemo;
 import com.rc.androiddemo.design.mvpdemo.view.MVPLoginDemo;
 import com.rc.androiddemo.resources.drawable.bitmapfile.BitmapFileDemo;
 import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
@@ -24,13 +25,18 @@ import com.rc.androiddemo.ui.animation.view.tween.AnimationDemo;
 import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
 import com.rc.androiddemo.ui.animation.view.tween.ScaleDemo;
 import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
+import com.rc.androiddemo.ui.custom.TwoScrollViewDemo;
 import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.pulltorefresh.PullToRefreshDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
+import com.rc.androiddemo.ui.recyclerview.RcGridDemo;
+import com.rc.androiddemo.ui.recyclerview.RcListDemo;
+import com.rc.androiddemo.ui.recyclerview.RvStaggeredGridDemo;
 import com.rc.androiddemo.ui.scroller.ScrollerDemo;
 import com.rc.androiddemo.ui.switchh.SwitchDemo;
+import com.rc.androiddemo.ui.textview.AutoCompleteTextViewDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
 import com.rc.androiddemo.ui.touchevent.TouchEventDemo;
 import com.rc.androiddemo.ui.webview.WebViewDemo;
@@ -143,6 +149,9 @@ public class MainActivity extends Activity {
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, PullToRefreshDemo.class,
             ScrollerDemo.class, ServiceDemo.class};
+            AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, TwoScrollViewDemo.class,
+            com.rc.androiddemo.ui.alpha.AlphaDemo.class, FragmentTabHostDemo.class,
+            RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class};
 
     @Override
     protected void onStop() {
