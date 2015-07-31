@@ -31,8 +31,12 @@ public class PullToRefreshView extends ViewGroup {
     private int offsetY;
 
     private int totalOffsetY;
+    
+    private int lastTotalOffsetY;
 
     private int lastYPos;
+
+    private boolean isRelease = false;
 
     private Scroller mScroller;
 
@@ -63,7 +67,7 @@ public class PullToRefreshView extends ViewGroup {
             headerView = findViewById(headerViewId);
             MarginLayoutParams mp = new MarginLayoutParams(LayoutParams.MATCH_PARENT, 100);
             headerView.setLayoutParams(mp);
-            headerView.offsetTopAndBottom(headerView.getMeasuredHeight());
+//            headerView.offsetTopAndBottom(headerView.getMeasuredHeight());
         }
 
         if (contentViewId != 0) {
@@ -121,7 +125,7 @@ public class PullToRefreshView extends ViewGroup {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         int action = ev.getAction();
         switch (action) {
-            case MotionEvent.ACTION_POINTER_UP:
+            case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 release();
                 return super.dispatchTouchEvent(ev);
@@ -140,12 +144,14 @@ public class PullToRefreshView extends ViewGroup {
     }
 
     private void updatePos(int offsetY) {
-        headerView.offsetTopAndBottom(offsetY);
-        contentView.offsetTopAndBottom(offsetY);
+//        headerView.offsetTopAndBottom(offsetY);
+//        contentView.offsetTopAndBottom(offsetY);
+        scrollBy(0, -offsetY);
         invalidate();
-        if (mHeaderHeight < totalOffsetY) {
-            release();
-        }
+        lastTotalOffsetY -= offsetY;
+//        if (mHeaderHeight < totalOffsetY) {
+//            release();
+//        }
     }
 
     @Override
@@ -154,11 +160,22 @@ public class PullToRefreshView extends ViewGroup {
         if (mScroller.computeScrollOffset()) {
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             invalidate();
+        }else if (mScroller.isFinished()) {
+            if (isRelease) {
+                totalOffsetY = 0;
+                lastTotalOffsetY = mScroller.getCurrY();
+                Log.v(this.getClass().getSimpleName(), "-------current offset is : " + lastTotalOffsetY);
+                Log.v(this.getClass().getSimpleName(), "-------current scroll offset is : " + getY());
+                isRelease = false;
+                log(headerView);
+                log(contentView);
+            }
+
         }
-        if (mScroller.getCurrY() == totalOffsetY) {
-            Log.v(this.getClass().getSimpleName(), "-------total offset is : " + totalOffsetY);
-            totalOffsetY = 0;
-        }
+//        if (mScroller.getCurrY() == totalOffsetY) {
+//            Log.v(this.getClass().getSimpleName(), "-------total offset is : " + totalOffsetY);
+//            totalOffsetY = 0;
+//        }
     }
 
     private boolean dispatchTouchEventSupper(MotionEvent ev) {
@@ -172,7 +189,13 @@ public class PullToRefreshView extends ViewGroup {
     }
 
     private void release() {
-        mScroller.startScroll(0, 0, 0, totalOffsetY, 1500);
+        if (isRelease) {
+            return;
+        }
+        isRelease = true;
+        mScroller.startScroll(0, lastTotalOffsetY, 0, totalOffsetY, 1500);
+        Log.v(this.getClass().getSimpleName(), "-------start scroll offset is : " + lastTotalOffsetY);
+        Log.v(this.getClass().getSimpleName(), "-------final scroll offset is : " + totalOffsetY);
         invalidate();
     }
 }

@@ -61,6 +61,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lvDemo = (ListView) findViewById(R.id.lvDemo);
+//        TextView tv = new TextView(this);
+//        tv.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, 300));
+//        tv.setText("sdfgsh");
+//        lvDemo.addHeaderView(tv);
         initData();
         initView();
 //        String apkRoot = "chmod 777 " + getPackageCodePath();
@@ -148,8 +152,7 @@ public class MainActivity extends Activity {
             RatingBarDemo.class, BitmapFileDemo.class, LayerListDemo.class, NinePatchFileDemo.class,
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, PullToRefreshDemo.class,
-            ScrollerDemo.class, ServiceDemo.class};
-            AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, TwoScrollViewDemo.class,
+            ScrollerDemo.class, ServiceDemo.class, TwoScrollViewDemo.class,
             com.rc.androiddemo.ui.alpha.AlphaDemo.class, FragmentTabHostDemo.class,
             RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class};
 

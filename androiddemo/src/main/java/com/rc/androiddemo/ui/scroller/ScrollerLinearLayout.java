@@ -32,7 +32,7 @@ public class ScrollerLinearLayout  extends LinearLayout{
         super(context, attrs, defStyleAttr);
         mScroller = new Scroller(context);
         btn = new Button(context);
-        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
+        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 400);
         btn.setLayoutParams(lp);
         addView(btn);
         btn.setOnClickListener(new OnClickListener() {
@@ -40,8 +40,8 @@ public class ScrollerLinearLayout  extends LinearLayout{
             public void onClick(View v) {
                 log();
                 log2();
-                btn.offsetTopAndBottom(200);
-                mScroller.startScroll(0, 0, 0, -1000, 3000);
+//                btn.offsetTopAndBottom(200);
+                mScroller.startScroll(0, 200, 0, 100, 3000);
                 invalidate();
             }
         });
