@@ -18,25 +18,29 @@ import com.rc.androiddemo.R;
  */
 public class PullToRefreshView extends ViewGroup {
 
+    /**
+     * 头部ViewID
+     */
     private int headerViewId;
-
+    /**
+     *
+     */
     private View headerView;
 
     private int contentViewId;
 
     private View contentView;
 
+    private int footerViewId;
+
+    private View footerView;
+
     private int mHeaderHeight;
 
-    private int offsetY;
-
-    private int totalOffsetY;
-    
-    private int lastTotalOffsetY;
-
-    private int lastYPos;
-
     private boolean isRelease = false;
+
+    private PtrManager ptrManager;
+//    private boolean is
 
     private Scroller mScroller;
 
@@ -46,12 +50,12 @@ public class PullToRefreshView extends ViewGroup {
 
     public PullToRefreshView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-
     }
 
     public PullToRefreshView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mScroller = new Scroller(context);
+        ptrManager = new PtrManager();
+        mScroller  = new Scroller(context);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PullToRefreshView, 0, 0);
         if (a != null) {
             headerViewId = a.getResourceId(R.styleable.PullToRefreshView_header_id, headerViewId);
@@ -63,18 +67,27 @@ public class PullToRefreshView extends ViewGroup {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        if (getChildCount() > 3) {
+            throw new IllegalArgumentException("child view can't more than three!");
+        }
         if (headerViewId != 0) {
             headerView = findViewById(headerViewId);
-            MarginLayoutParams mp = new MarginLayoutParams(LayoutParams.MATCH_PARENT, 100);
+            PtrvMarginLayoutParams mp = new PtrvMarginLayoutParams(
+                    PtrvMarginLayoutParams.MATCH_PARENT, 100);
             headerView.setLayoutParams(mp);
 //            headerView.offsetTopAndBottom(headerView.getMeasuredHeight());
         }
 
         if (contentViewId != 0) {
             contentView = findViewById(contentViewId);
-            MarginLayoutParams mp = new MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            PtrvMarginLayoutParams mp = new PtrvMarginLayoutParams(
+                    PtrvMarginLayoutParams.MATCH_PARENT, PtrvMarginLayoutParams.MATCH_PARENT);
             contentView.setLayoutParams(mp);
         }
+    }
+
+    private void initChildView(int id, View view) {
+        view = findViewById(id);
     }
 
     @Override
@@ -83,7 +96,7 @@ public class PullToRefreshView extends ViewGroup {
 
         measureChildWithMargins(headerView, widthMeasureSpec, 0, heightMeasureSpec, 0);
 //        headerView.measure(widthMeasureSpec, heightMeasureSpec);
-        MarginLayoutParams lp = (MarginLayoutParams) headerView.getLayoutParams();
+        PtrvMarginLayoutParams lp = (PtrvMarginLayoutParams) headerView.getLayoutParams();
         mHeaderHeight = lp.topMargin + lp.bottomMargin + headerView.getMeasuredHeight();
         contentView.measure(widthMeasureSpec, heightMeasureSpec);
     }
@@ -97,7 +110,7 @@ public class PullToRefreshView extends ViewGroup {
             MarginLayoutParams lp = (MarginLayoutParams) headerView.getLayoutParams();
             int left = paddingLeft + lp.leftMargin;
             int right = left + headerView.getMeasuredWidth();
-            int top = paddingTop + lp.topMargin + totalOffsetY - mHeaderHeight;
+            int top = paddingTop + lp.topMargin + ptrManager.getTotalOffsetY() - mHeaderHeight;
             int bottom = top + headerView.getMeasuredHeight();
             headerView.layout(left, top, right, bottom);
             log(headerView);
@@ -107,10 +120,11 @@ public class PullToRefreshView extends ViewGroup {
             MarginLayoutParams lp = (MarginLayoutParams) contentView.getLayoutParams();
             int left = paddingLeft + lp.leftMargin;
             int right = left + contentView.getMeasuredWidth();
-            int top = paddingTop + lp.topMargin + totalOffsetY;
+            int top = paddingTop + lp.topMargin + ptrManager.getTotalOffsetY();
             int bottom = top + contentView.getMeasuredHeight();
             contentView.layout(left, top, right, bottom);
             log(contentView);
+            Log.v(this.getClass().getSimpleName(), "-------contentView : " + contentView.getMeasuredHeight() + ",  " + getBottom());
         }
 
     }
@@ -123,32 +137,34 @@ public class PullToRefreshView extends ViewGroup {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.v(this.getClass().getSimpleName(), "-------contentView : " + contentView.getScrollY());
+        boolean bool = dispatchTouchEventSupper(ev);
         int action = ev.getAction();
         switch (action) {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 release();
-                return super.dispatchTouchEvent(ev);
+//                return super.dispatchTouchEvent(ev);
+                break;
             case MotionEvent.ACTION_MOVE:
-                offsetY = (int) (ev.getY() - lastYPos);
-                totalOffsetY += offsetY;
-                lastYPos = (int) ev.getY();
-                updatePos(offsetY);
-                return dispatchTouchEventSupper(ev);
+                updatePos(ptrManager.moveOffset(ev.getY()));
+//                return dispatchTouchEventSupper(ev);
+                break;
             case MotionEvent.ACTION_DOWN:
-                lastYPos = (int) ev.getY();
-                dispatchTouchEventSupper(ev);
-                return true;
+                ptrManager.setLastYPos((int) ev.getY());
+//                dispatchTouchEventSupper(ev);
+                break;
         }
-        return dispatchTouchEventSupper(ev);
+        return bool;
     }
 
     private void updatePos(int offsetY) {
+        //亦可通过以下两个方法实现视图跟随手指滑动偏移效果
 //        headerView.offsetTopAndBottom(offsetY);
 //        contentView.offsetTopAndBottom(offsetY);
         scrollBy(0, -offsetY);
         invalidate();
-        lastTotalOffsetY -= offsetY;
+//        lastTotalOffsetY -= offsetY;
 //        if (mHeaderHeight < totalOffsetY) {
 //            release();
 //        }
@@ -162,9 +178,8 @@ public class PullToRefreshView extends ViewGroup {
             invalidate();
         }else if (mScroller.isFinished()) {
             if (isRelease) {
-                totalOffsetY = 0;
-                lastTotalOffsetY = mScroller.getCurrY();
-                Log.v(this.getClass().getSimpleName(), "-------current offset is : " + lastTotalOffsetY);
+                ptrManager.setTotalOffsetY(0);
+                Log.v(this.getClass().getSimpleName(), "-------current header height is : " + (headerView.getBottom() - getScrollY()));
                 Log.v(this.getClass().getSimpleName(), "-------current scroll offset is : " + getY());
                 isRelease = false;
                 log(headerView);
@@ -176,30 +191,31 @@ public class PullToRefreshView extends ViewGroup {
 //            Log.v(this.getClass().getSimpleName(), "-------total offset is : " + totalOffsetY);
 //            totalOffsetY = 0;
 //        }
+
     }
 
     private boolean dispatchTouchEventSupper(MotionEvent ev) {
         return super.dispatchTouchEvent(ev);
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return ev.getAction() == MotionEvent.ACTION_DOWN && headerView.getY() > 0 ||
-                super.onInterceptTouchEvent(ev);
-    }
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent ev) {
+//        return ev.getAction() == MotionEvent.ACTION_DOWN && headerView.getY() > 0 ||
+//                super.onInterceptTouchEvent(ev);
+//    }
 
     private void release() {
         if (isRelease) {
             return;
         }
         isRelease = true;
-        mScroller.startScroll(0, lastTotalOffsetY, 0, totalOffsetY, 1500);
-        Log.v(this.getClass().getSimpleName(), "-------start scroll offset is : " + lastTotalOffsetY);
-        Log.v(this.getClass().getSimpleName(), "-------final scroll offset is : " + totalOffsetY);
+        mScroller.startScroll(0, ptrManager.getTotalOffsetY(), 0, -(ptrManager.getTotalOffsetY()), 1500);
+        Log.v(this.getClass().getSimpleName(), "-------start scroll offset is : " + ptrManager.getTotalOffsetY());
+        Log.v(this.getClass().getSimpleName(), "-------final scroll offset is : " + -ptrManager.getTotalOffsetY());
         invalidate();
     }
 
-    public final class PtrvMarginLayoutParams extends MarginLayoutParams {
+    public class PtrvMarginLayoutParams extends MarginLayoutParams {
         public PtrvMarginLayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
         }
