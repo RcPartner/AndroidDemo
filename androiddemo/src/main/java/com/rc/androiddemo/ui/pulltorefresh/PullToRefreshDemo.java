@@ -2,8 +2,11 @@ package com.rc.androiddemo.ui.pulltorefresh;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.rc.androiddemo.R;
 
@@ -27,6 +30,12 @@ public class PullToRefreshDemo extends Activity {
                         "test", "test", "test", "test", "test", "test", "test", "test",
                         "test", "test", "test", "test", "test", "test", "test", "test",
                         "test", "test", "test", "test", "test", "test", "test", "test"}));
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(PullToRefreshDemo.this, "click item position is :" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

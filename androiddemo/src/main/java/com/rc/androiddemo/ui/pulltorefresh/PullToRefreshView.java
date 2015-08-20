@@ -146,7 +146,7 @@ public class PullToRefreshView extends ViewGroup {
     private void updatePos(int offsetY) {
 //        headerView.offsetTopAndBottom(offsetY);
 //        contentView.offsetTopAndBottom(offsetY);
-        scrollBy(0, -offsetY);
+        scrollBy(0, (int) (-offsetY * 0.7));
         invalidate();
         lastTotalOffsetY -= offsetY;
 //        if (mHeaderHeight < totalOffsetY) {
@@ -184,8 +184,7 @@ public class PullToRefreshView extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return ev.getAction() == MotionEvent.ACTION_DOWN && headerView.getY() > 0 ||
-                super.onInterceptTouchEvent(ev);
+        return headerView.getY() > 0;
     }
 
     private void release() {
@@ -193,7 +192,7 @@ public class PullToRefreshView extends ViewGroup {
             return;
         }
         isRelease = true;
-        mScroller.startScroll(0, lastTotalOffsetY, 0, totalOffsetY, 1500);
+        mScroller.startScroll(0, (int) (lastTotalOffsetY * 0.7), 0, (int) (totalOffsetY * 0.7), 1500);
         Log.v(this.getClass().getSimpleName(), "-------start scroll offset is : " + lastTotalOffsetY);
         Log.v(this.getClass().getSimpleName(), "-------final scroll offset is : " + totalOffsetY);
         invalidate();
