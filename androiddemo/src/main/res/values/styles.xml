@@ -6,8 +6,9 @@
     </style>
 
     <declare-styleable name="PullToRefreshView">
-        <attr name="header_id" format="reference" />
-        <attr name="content_id" format="reference" />
+        <attr name="header_id" format="integer" />
+        <attr name="content_id" format="integer" />
+        <attr name="footer_id" format="integer" />
     </declare-styleable>
 
     <style name="bfa_tv">

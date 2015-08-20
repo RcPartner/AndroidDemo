@@ -71,3 +71,4 @@ public class ScrollerLinearLayout  extends LinearLayout{
                 " ------cury: " + mScroller.getCurrY());
     }
 }
+
