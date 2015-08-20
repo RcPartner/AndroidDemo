@@ -21,54 +21,58 @@ public class PtrManager {
 
     long releaseDuration = 1500l;
 
+    boolean isLoading;
+
+    boolean isPulling;
+
     public int moveOffset(float currentY) {
-        int offset = (int) (currentY - lastYPos);
+        int offset = (int) ((currentY - lastYPos) * pullOffsetRatio);
         lastYPos   = (int) currentY;
         totalOffsetY -= offset;
         return offset;
     }
 
-    public float getPullOffset() {
-        return totalOffsetY * pullOffsetRatio;
-    }
-
-    public int getmHeaderHeight() {
-        return mHeaderHeight;
-    }
-
-    public void setmHeaderHeight(int mHeaderHeight) {
-        this.mHeaderHeight = mHeaderHeight;
-    }
-
-    public int getOffsetY() {
-        return offsetY;
-    }
-
-    public void setOffsetY(int offsetY) {
-        this.offsetY = offsetY;
-    }
-
-    public int getTotalOffsetY() {
-        return totalOffsetY;
-    }
-
-    public void setTotalOffsetY(int totalOffsetY) {
-        this.totalOffsetY = totalOffsetY;
-    }
-
-    public int getLastTotalOffsetY() {
-        return lastTotalOffsetY;
-    }
-
-    public void setLastTotalOffsetY(int lastTotalOffsetY) {
-        this.lastTotalOffsetY = lastTotalOffsetY;
-    }
-
-    public int getLastYPos() {
-        return lastYPos;
-    }
-
-    public void setLastYPos(int lastYPos) {
-        this.lastYPos = lastYPos;
-    }
+//    public float getPullOffset() {
+//        return totalOffsetY;
+//    }
+//
+//    public int getmHeaderHeight() {
+//        return mHeaderHeight;
+//    }
+//
+//    public void setmHeaderHeight(int mHeaderHeight) {
+//        this.mHeaderHeight = mHeaderHeight;
+//    }
+//
+//    public int getOffsetY() {
+//        return offsetY;
+//    }
+//
+//    public void setOffsetY(int offsetY) {
+//        this.offsetY = offsetY;
+//    }
+//
+//    public int getTotalOffsetY() {
+//        return totalOffsetY;
+//    }
+//
+//    public void setTotalOffsetY(int totalOffsetY) {
+//        this.totalOffsetY = totalOffsetY;
+//    }
+//
+//    public int getLastTotalOffsetY() {
+//        return lastTotalOffsetY;
+//    }
+//
+//    public void setLastTotalOffsetY(int lastTotalOffsetY) {
+//        this.lastTotalOffsetY = lastTotalOffsetY;
+//    }
+//
+//    public int getLastYPos() {
+//        return lastYPos;
+//    }
+//
+//    public void setLastYPos(int lastYPos) {
+//        this.lastYPos = lastYPos;
+//    }
 }

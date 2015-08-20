@@ -40,7 +40,8 @@ public class PullToRefreshView extends ViewGroup {
     private boolean isRelease = false;
 
     private PtrManager ptrManager;
-//    private boolean is
+
+    private IPullUpOrDownController iPullUpOrDownController;
 
     private Scroller mScroller;
 
@@ -110,7 +111,7 @@ public class PullToRefreshView extends ViewGroup {
             MarginLayoutParams lp = (MarginLayoutParams) headerView.getLayoutParams();
             int left = paddingLeft + lp.leftMargin;
             int right = left + headerView.getMeasuredWidth();
-            int top = paddingTop + lp.topMargin + ptrManager.getTotalOffsetY() - mHeaderHeight;
+            int top = paddingTop + lp.topMargin + ptrManager.totalOffsetY - mHeaderHeight;
             int bottom = top + headerView.getMeasuredHeight();
             headerView.layout(left, top, right, bottom);
             log(headerView);
@@ -120,7 +121,7 @@ public class PullToRefreshView extends ViewGroup {
             MarginLayoutParams lp = (MarginLayoutParams) contentView.getLayoutParams();
             int left = paddingLeft + lp.leftMargin;
             int right = left + contentView.getMeasuredWidth();
-            int top = paddingTop + lp.topMargin + ptrManager.getTotalOffsetY();
+            int top = paddingTop + lp.topMargin + ptrManager.totalOffsetY;
             int bottom = top + contentView.getMeasuredHeight();
             contentView.layout(left, top, right, bottom);
             log(contentView);
@@ -137,7 +138,7 @@ public class PullToRefreshView extends ViewGroup {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.v(this.getClass().getSimpleName(), "-------contentView : " + contentView.getScrollY());
+
         boolean bool = dispatchTouchEventSupper(ev);
         int action = ev.getAction();
         switch (action) {
@@ -151,7 +152,7 @@ public class PullToRefreshView extends ViewGroup {
 //                return dispatchTouchEventSupper(ev);
                 break;
             case MotionEvent.ACTION_DOWN:
-                ptrManager.setLastYPos((int) ev.getY());
+                ptrManager.lastYPos = (int) ev.getY();
 //                dispatchTouchEventSupper(ev);
                 break;
         }
@@ -178,7 +179,7 @@ public class PullToRefreshView extends ViewGroup {
             invalidate();
         }else if (mScroller.isFinished()) {
             if (isRelease) {
-                ptrManager.setTotalOffsetY(0);
+                ptrManager.totalOffsetY = 0;
                 Log.v(this.getClass().getSimpleName(), "-------current header height is : " + (headerView.getBottom() - getScrollY()));
                 Log.v(this.getClass().getSimpleName(), "-------current scroll offset is : " + getY());
                 isRelease = false;
@@ -198,21 +199,31 @@ public class PullToRefreshView extends ViewGroup {
         return super.dispatchTouchEvent(ev);
     }
 
-//    @Override
-//    public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        return ev.getAction() == MotionEvent.ACTION_DOWN && headerView.getY() > 0 ||
-//                super.onInterceptTouchEvent(ev);
-//    }
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        int action = ev.getAction();
+        if (iPullUpOrDownController == null) {
+            iPullUpOrDownController = new PullUpOrDownController();
+        }
+        if (action == MotionEvent.ACTION_DOWN) {
+            return false;
+        }
+        return iPullUpOrDownController.canPullDown(this, contentView);
+    }
 
     private void release() {
         if (isRelease) {
             return;
         }
         isRelease = true;
-        mScroller.startScroll(0, ptrManager.getTotalOffsetY(), 0, -(ptrManager.getTotalOffsetY()), 1500);
-        Log.v(this.getClass().getSimpleName(), "-------start scroll offset is : " + ptrManager.getTotalOffsetY());
-        Log.v(this.getClass().getSimpleName(), "-------final scroll offset is : " + -ptrManager.getTotalOffsetY());
+        mScroller.startScroll(0, ptrManager.totalOffsetY, 0, -(ptrManager.totalOffsetY), 1500);
+        Log.v(this.getClass().getSimpleName(), "-------start scroll offset is : " + ptrManager.totalOffsetY);
+        Log.v(this.getClass().getSimpleName(), "-------final scroll offset is : " + -ptrManager.totalOffsetY);
         invalidate();
+    }
+
+    public void setiPullUpOrDownController(IPullUpOrDownController iPullUpOrDownController) {
+        this.iPullUpOrDownController = iPullUpOrDownController;
     }
 
     public class PtrvMarginLayoutParams extends MarginLayoutParams {
