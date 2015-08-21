@@ -21,6 +21,10 @@ public class PtrManager {
 
     long releaseDuration = 1500l;
 
+    boolean isMoveUp;
+
+    boolean isMoveDown;
+
     boolean isLoading;
 
     boolean isPulling;
@@ -29,6 +33,9 @@ public class PtrManager {
         int offset = (int) ((currentY - lastYPos) * pullOffsetRatio);
         lastYPos   = (int) currentY;
         totalOffsetY -= offset;
+        isPulling = true;
+        isMoveUp = offset < 0;
+        isMoveDown = offset > 0;
         return offset;
     }
 

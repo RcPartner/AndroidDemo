@@ -144,11 +144,17 @@ public class PullToRefreshView extends ViewGroup {
         switch (action) {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
+                ptrManager.isPulling = false;
                 release();
 //                return super.dispatchTouchEvent(ev);
                 break;
             case MotionEvent.ACTION_MOVE:
-                updatePos(ptrManager.moveOffset(ev.getY()));
+                int offset = ptrManager.moveOffset(ev.getY());
+                if ((ptrManager.isMoveUp && (iPullUpOrDownController.canPullUp(this, contentView) ||
+                        getScrollY() < 0) || (ptrManager.isMoveDown && iPullUpOrDownController
+                        .canPullDown(this, contentView)))) {
+                    updatePos(offset);
+                }
 //                return dispatchTouchEventSupper(ev);
                 break;
             case MotionEvent.ACTION_DOWN:
@@ -202,13 +208,20 @@ public class PullToRefreshView extends ViewGroup {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         int action = ev.getAction();
+        boolean intercept = false;
         if (iPullUpOrDownController == null) {
             iPullUpOrDownController = new PullUpOrDownController();
         }
-        if (action == MotionEvent.ACTION_DOWN) {
-            return false;
+        switch (action) {
+            case MotionEvent.ACTION_MOVE:
+                intercept = (ptrManager.isMoveUp && iPullUpOrDownController.canPullUp(this, contentView)) ||
+                        (ptrManager.isMoveDown && iPullUpOrDownController.canPullDown(this, contentView));
+                break;
+            case MotionEvent.ACTION_DOWN:
+                intercept =  ptrManager.isPulling;
+                break;
         }
-        return iPullUpOrDownController.canPullDown(this, contentView);
+        return intercept;
     }
 
     private void release() {
