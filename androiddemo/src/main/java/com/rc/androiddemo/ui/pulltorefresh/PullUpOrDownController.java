@@ -1,5 +1,6 @@
 package com.rc.androiddemo.ui.pulltorefresh;
 
+import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -13,7 +14,18 @@ public class PullUpOrDownController implements IPullUpOrDownController {
 
     @Override
     public boolean canPullUp(ViewGroup parent, View content) {
-
+        if (content instanceof AbsListView) {
+            AbsListView absListView = (AbsListView) content;
+            return absListView.getChildCount() > 0 && absListView.getChildAt(
+                    absListView.getLastVisiblePosition() - absListView.getFirstVisiblePosition())
+                    .getBottom() == parent.getBottom();
+        }
+        if (content instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) content;
+            Rect rect = new Rect();
+            viewGroup.getGlobalVisibleRect(rect);
+            return viewGroup.getScrollY() == (viewGroup.getMeasuredHeight() - rect.height());
+        }
         return false;
     }
 
@@ -21,11 +33,11 @@ public class PullUpOrDownController implements IPullUpOrDownController {
     public boolean canPullDown(ViewGroup parent, View content) {
         if (content instanceof AbsListView) {
             AbsListView absListView = (AbsListView) content;
-            return !(absListView.getChildCount() > 0 && absListView.getFirstVisiblePosition() > 0);
+            return absListView.getChildCount() > 0 && absListView.getFirstVisiblePosition() == 0;
         }
         if (content instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) content;
-            return !(viewGroup.getChildCount() > 0 && viewGroup.getChildAt(0).getTop() > 0);
+            return viewGroup.getChildCount() > 0 && viewGroup.getChildAt(0).getTop() == 0;
         }
         return false;
     }
