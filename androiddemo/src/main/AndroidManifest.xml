@@ -67,6 +67,8 @@
         <activity android:name=".ui.pulltorefresh.PullToRefreshDemo" />
         <!-- 滚动视图 -->
         <activity android:name=".ui.scroller.ScrollerDemo" />
+        <!-- 圆形进度条 -->
+        <activity android:name=".ui.progressview.RoundProgressViewDemo" />
         <!-- service-->
         <activity android:name=".service.ServiceDemo" />
 
