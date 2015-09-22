@@ -5,4 +5,7 @@
 
     <dimen name="item_mar_top">10dp</dimen>
     <dimen name="item_mar_left">20dp</dimen>
+
+    <dimen name="default_padding">5dp</dimen>
+    <dimen name="default_divider_padding">3dp</dimen>
 </resources>
