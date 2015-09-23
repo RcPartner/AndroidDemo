@@ -7,4 +7,9 @@
     <string name="underline"><u>引用资源使用下划线</u></string>
     <string name="pfd_tv_version_text">我是main版本</string>
 
+    <string-array name="title">
+        <item>区域</item>
+        <item>价格</item>
+        <item>更多</item>
+    </string-array>
 </resources>

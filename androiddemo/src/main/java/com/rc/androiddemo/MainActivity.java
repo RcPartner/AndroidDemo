@@ -27,6 +27,7 @@ import com.rc.androiddemo.ui.animation.view.tween.ScaleDemo;
 import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
 import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
+import com.rc.androiddemo.ui.dialog.FilterViewDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
 import com.rc.androiddemo.ui.progressview.RoundProgressViewDemo;
 import com.rc.androiddemo.ui.pulltorefresh.PullToRefreshDemo;
@@ -154,7 +155,7 @@ public class MainActivity extends Activity {
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, PullToRefreshDemo.class,
             ScrollerDemo.class, ServiceDemo.class,  FragmentTabHostDemo.class,
             RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class,
-            RoundProgressViewDemo.class};
+            RoundProgressViewDemo.class, FilterViewDemo.class};
 
     @Override
     protected void onStop() {

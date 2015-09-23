@@ -25,11 +25,13 @@ public class FilterTitleView extends LinearLayout {
 
     private int dividerWidth;
 
-    private final int DEFAULT_WIDTH = 6;
+    private final int DEFAULT_WIDTH = 4;
 
     private String[] strItems;
 
     private IGetItemView iGetItemView;
+
+    OnItemClickListener itemClickListener;
 
     public FilterTitleView(Context context) {
         this(context, null);
@@ -49,7 +51,7 @@ public class FilterTitleView extends LinearLayout {
         }
         strItems = a.getResources().getStringArray(textIds);
         itemLength = strItems.length;
-        dividerWidth = a.getDimension(R.styleable.FilterTitleView_dividerWidth, DEFAULT_WIDTH);
+        dividerWidth = a.getDimensionPixelOffset(R.styleable.FilterTitleView_dividerWidth, DEFAULT_WIDTH);
         dividerColor = a.getColor(R.styleable.FilterTitleView_dividerColor, Color.GRAY);
 
         a.recycle();
@@ -62,10 +64,20 @@ public class FilterTitleView extends LinearLayout {
             return;
         }
         for (int i = 0; i < itemLength; i++) {
-            View v = iGetItemView == null ? getDefaultItemView(i) : iGetItemView.getView(i);
+            final int position = i;
+            View v = iGetItemView == null ? getDefaultItemView() : iGetItemView.getView(position);
             if (v instanceof TextView) {
-                ((TextView) v).setText(strItems[i]);
+                ((TextView) v).setText(strItems[position]);
             }
+            v.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateTitle(position);
+                    if (itemClickListener != null) {
+                        itemClickListener.onClick(position, v);
+                    }
+                }
+            });
             addView(v);
             if (i != itemLength - 1) {
                 addDivider();
@@ -73,27 +85,45 @@ public class FilterTitleView extends LinearLayout {
         }
     }
 
-    private TextView getDefaultItemView(int position) {
+    private TextView getDefaultItemView() {
         TextView tv = new TextView(getContext());
         LayoutParams lp = new LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         tv.setGravity(Gravity.CENTER);
-        int padding = getResources().getDimension(R.dimen.default_padding);
+        int padding = getResources().getDimensionPixelOffset(R.dimen.default_padding);
         tv.setPadding(padding, padding, padding, padding);
         tv.setLayoutParams(lp);
         return tv;
     }
 
+    private void updateTitle(int selectIndex) {
+        for (int i = 0; i < getChildCount(); i++) {
+            getChildAt(i).setSelected(i == selectIndex);
+        }
+    }
+
     private void addDivider() {
         View v = new View(getContext());
         LayoutParams lp = new LayoutParams(dividerWidth, LayoutParams.MATCH_PARENT);
-        int margin = getResources().getDimension(R.dimen.default_divider_padding);
+        int margin = getResources().getDimensionPixelOffset(R.dimen.default_divider_padding);
         lp.setMargins(0, margin, 0, margin);
         v.setLayoutParams(lp);
         v.setBackgroundColor(dividerColor);
         addView(v);
     }
 
+    public void setiGetItemView(IGetItemView iGetItemView) {
+        this.iGetItemView = iGetItemView;
+    }
+
+    public void setItemClickListener(OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
     public interface IGetItemView {
         View getView(int position);
+    }
+
+    public interface OnItemClickListener {
+        void onClick(int position, View view);
     }
 }

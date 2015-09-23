@@ -71,6 +71,7 @@
         <activity android:name=".ui.progressview.RoundProgressViewDemo" />
         <!-- service-->
         <activity android:name=".service.ServiceDemo" />
+        <activity android:name=".ui.dialog.FilterViewDemo" />
 
         <service
             android:name=".service.MyService"
