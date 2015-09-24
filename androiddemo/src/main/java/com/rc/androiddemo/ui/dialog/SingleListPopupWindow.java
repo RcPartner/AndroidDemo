@@ -87,7 +87,8 @@ public class SingleListPopupWindow<T> extends PopupWindow{
         lvMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                getContentView().requestLayout();
+                getContentView().invalidate();
             }
         });
         vReset.setOnClickListener(new View.OnClickListener() {
