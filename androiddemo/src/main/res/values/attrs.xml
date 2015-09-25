@@ -13,4 +13,9 @@
             <enum name="STROKE" value="1" />
         </attr>
     </declare-styleable>
+    
+    <declare-styleable name="FlowLayout">
+        <attr name="multi_select" format="boolean"/>
+        <attr name="multi_select_count" format="integer" />
+    </declare-styleable>
 </resources>

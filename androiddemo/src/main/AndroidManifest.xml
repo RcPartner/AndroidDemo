@@ -72,6 +72,7 @@
         <!-- service-->
         <activity android:name=".service.ServiceDemo" />
         <activity android:name=".ui.dialog.FilterViewDemo" />
+        <activity android:name=".ui.flowlayout.FlowLayoutDemo" />
 
         <service
             android:name=".service.MyService"
