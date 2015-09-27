@@ -87,8 +87,15 @@ public class SingleListPopupWindow<T> extends PopupWindow{
         lvMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                getContentView().requestLayout();
-                getContentView().invalidate();
+//                for (int i = 0, j = lvMenu.getFirstVisiblePosition();
+//                     i < lvMenu.getLastVisiblePosition() - lvMenu.getFirstVisiblePosition() + 1;
+//                     i++, j++) {
+//                    lvMenu.getChildAt(i).setSelected(lvMenu.getCheckedItemPositions().get(j));
+//                }\
+                if (adapter.getLists().size() > 0) {
+                    adapter.notifyDataSetChanged();
+                }
+
             }
         });
         vReset.setOnClickListener(new View.OnClickListener() {
@@ -126,10 +133,10 @@ public class SingleListPopupWindow<T> extends PopupWindow{
 
     public void setAdapter(BaseFilterListAdapter<T> adapter) {
         this.adapter = adapter;
-        if (this.adapter != null) {
-            adapter.setSparseBooleanArray(lvMenu.getCheckedItemPositions());
-        }
         lvMenu.setAdapter(this.adapter);
+        if (this.adapter != null) {
+            adapter.setLvList(lvMenu);
+        }
     }
 
     public void setMultiSelectedCallBack(MultiSelectedCallBack<T> multiSelectedCallBack) {

@@ -86,9 +86,13 @@ public class FilterViewDemo extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.item_list, null);
-            ((TextView) convertView).setText(getLists().get(position));
-            return super.getView(position, convertView, parent);
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_list, null);
+            }
+            TextView tv = (TextView) convertView.findViewById(R.id.tvTest);
+            tv.setText(getLists().get(position));
+            tv.setSelected(getLvList().getCheckedItemPositions().get(position));
+            return convertView;
         }
     }
 }
