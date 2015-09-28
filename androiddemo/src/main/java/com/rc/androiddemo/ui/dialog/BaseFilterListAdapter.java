@@ -6,7 +6,6 @@ import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 
 import java.util.List;
 
@@ -21,7 +20,11 @@ public abstract class BaseFilterListAdapter<T> extends BaseAdapter {
 
     private List<T> lists;
 
-    private ListView lvList;
+    private SparseBooleanArray sparseBooleanArray;
+
+    public BaseFilterListAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
 
     public BaseFilterListAdapter(Context mContext, List<T> lists) {
         this.mContext = mContext;
@@ -30,8 +33,8 @@ public abstract class BaseFilterListAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView.setSelected(lvList.getCheckedItemPositions().get(position));
-        Log.d(BaseFilterListAdapter.class.getSimpleName(), "position:" + position + ",isSelected: " + lvList.getCheckedItemPositions().get(position));
+        convertView.setSelected(sparseBooleanArray.get(position));
+        Log.d(BaseFilterListAdapter.class.getSimpleName(), "position:" + position + ",isSelected: " + sparseBooleanArray.get(position));
         return convertView;
     }
 
@@ -58,11 +61,14 @@ public abstract class BaseFilterListAdapter<T> extends BaseAdapter {
         this.lists = lists;
     }
 
-    public ListView getLvList() {
-        return lvList;
+    public SparseBooleanArray getSparseBooleanArray() {
+        return sparseBooleanArray;
     }
 
-    public void setLvList(ListView lvList) {
-        this.lvList = lvList;
+    public void setSparseBooleanArray(SparseBooleanArray sparseBooleanArray) {
+        if (sparseBooleanArray == null) {
+            sparseBooleanArray = new SparseBooleanArray();
+        }
+        this.sparseBooleanArray = sparseBooleanArray;
     }
 }
