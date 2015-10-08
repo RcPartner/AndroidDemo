@@ -76,6 +76,7 @@ public class PullToRefreshView extends ViewGroup {
             PtrvMarginLayoutParams mp = new PtrvMarginLayoutParams(
                     PtrvMarginLayoutParams.MATCH_PARENT, 100);
             headerView.setLayoutParams(mp);
+
 //            headerView.offsetTopAndBottom(headerView.getMeasuredHeight());
         }
 
