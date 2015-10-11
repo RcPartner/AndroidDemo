@@ -7,6 +7,7 @@ import android.support.v4.util.ArrayMap;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.rc.androiddemo.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Description:
@@ -64,49 +66,51 @@ public class FilterViewDemo extends Activity {
         View contentView = getLayoutInflater().inflate(R.layout.popup_single_list, null);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        final SingleListPopupWindow<String> w = new SingleListPopupWindow<String>(contentView,
+        final SingleListPopupWindow w = new SingleListPopupWindow(contentView,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         w.setAdapter(new MyAdapter(this, list));
-        w.setSingleSelectedCallBack(new SingleListPopupWindow.SingleSelectedCallBack<String>() {
+        w.setvReset(contentView.findViewById(R.id.vReset));
+        w.setvConfirm(contentView.findViewById(R.id.vConfirm));
+        w.setOnSingleSelected(new SingleListPopupWindow.OnSingleSelected() {
             @Override
-            public void selected(int position, String data) {
-                Toast.makeText(FilterViewDemo.this, data, Toast.LENGTH_SHORT).show();
+            public void onSingleSelected(int position) {
+                Toast.makeText(FilterViewDemo.this, String.valueOf(w.getAdapter().getLists().get(position)), Toast.LENGTH_SHORT).show();
             }
         });
-        w.setMultiSelectedCallBack(new SingleListPopupWindow.MultiSelectedCallBack<String>() {
+        w.setOnMultiSelected(new SingleListPopupWindow.OnMultiSelected() {
             @Override
-            public void multiSelected(List<String> data) {
-                for (int i = 0; i < data.size(); i++) {
-                    Toast.makeText(FilterViewDemo.this, data.get(i), Toast.LENGTH_SHORT).show();
+            public void onMultiSelected(List<Integer> selectedList) {
+                for (int i = 0; i < w.getAdapter().getLists().size(); i++) {
+                    Toast.makeText(FilterViewDemo.this, String.valueOf(w.getAdapter().getLists().get(i)), Toast.LENGTH_SHORT).show();
                 }
-//                w.setAdapter(new MyAdapter(FilterViewDemo.this, list2));
-//                w.getContentView().requestLayout();
             }
+
         });
         w.showAsDropDown(v);
     }
 
     private void getDoubleListPopupWindow(View v) {
         View contentView = getLayoutInflater().inflate(R.layout.popup_double_list, null);
-        final DoubleListPopupWindow<String, String> w = new DoubleListPopupWindow<>(contentView,
+        final DoubleListPopupWindow w = new DoubleListPopupWindow(contentView,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        w.setvReset(contentView.findViewById(R.id.vReset));
+        w.setvConfirm(contentView.findViewById(R.id.vConfirm));
+        w.setLvSecond((ListView) contentView.findViewById(R.id.lvSecond));
         w.setLeftAdapter(new MyAdapter(this, list));
-        w.setDataList(list2);
+//        w.setDataList(list2);
         w.setAdapter(new MyAdapter(this));
-        w.setSingleSelectedCallBack(new SingleListPopupWindow.SingleSelectedCallBack<String>() {
+        w.setonSelected(new DoubleListPopupWindow.OnSelected() {
             @Override
-            public void selected(int position, String data) {
-                Toast.makeText(FilterViewDemo.this, data, Toast.LENGTH_SHORT).show();
+            public void onSelected(int parentPos, int childPos) {
+                Toast.makeText(FilterViewDemo.this, parentPos + "," + childPos, Toast.LENGTH_SHORT).show();
             }
+
         });
-        w.setMultiSelectedCallBack(new SingleListPopupWindow.MultiSelectedCallBack<String>() {
+        w.setOnLeftListItemClickListener(new DoubleListPopupWindow.OnLeftListItemClickListener() {
             @Override
-            public void multiSelected(List<String> data) {
-                for (int i = 0; i < data.size(); i++) {
-                    Toast.makeText(FilterViewDemo.this, data.get(i), Toast.LENGTH_SHORT).show();
-                }
-//                w.setAdapter(new MyAdapter(FilterViewDemo.this, list2));
-//                w.getContentView().requestLayout();
+            public void onItemClick(int position) {
+                ((MyAdapter) w.getAdapter()).setLists(list2.get(position));
+                w.refreshRightList(position);
             }
         });
         w.showAsDropDown(v);

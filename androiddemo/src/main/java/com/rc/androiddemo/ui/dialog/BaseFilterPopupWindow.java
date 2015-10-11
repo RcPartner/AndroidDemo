@@ -10,14 +10,16 @@ import android.widget.PopupWindow;
 import com.rc.androiddemo.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Description:
  * Author: WuRuiqiang(263454190@qq.com)
  * Date: 2015-09-28 10:41
  */
-public abstract class BaseFilterPopupWindow<T> extends PopupWindow {
+public abstract class BaseFilterPopupWindow extends PopupWindow {
 
     protected ListView lvData;
 
@@ -27,11 +29,7 @@ public abstract class BaseFilterPopupWindow<T> extends PopupWindow {
 
     protected boolean isMultiSelect;
 
-    protected BaseFilterListAdapter<T> adapter;
-
-    protected SingleSelectedCallBack<T> singleSelectedCallBack;
-
-    protected MultiSelectedCallBack<T> multiSelectedCallBack;
+    protected BaseFilterListAdapter adapter;
 
     public BaseFilterPopupWindow(View contentView, int width, int height) {
         this(contentView, width, height, false);
@@ -54,7 +52,7 @@ public abstract class BaseFilterPopupWindow<T> extends PopupWindow {
             throw new IllegalArgumentException("contentView must have a listView whose id attribute is android.R.id.list");
         }
         //实例化一个ColorDrawable颜色为半透明
-        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        ColorDrawable dw = new ColorDrawable(0x00000000);
         //设置SelectPicPopupWindow弹出窗体的背景
         setBackgroundDrawable(dw);
 
@@ -74,27 +72,20 @@ public abstract class BaseFilterPopupWindow<T> extends PopupWindow {
         lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                singleSelected(position);
                 adapter.notifyDataSetChanged();
-                if (singleSelectedCallBack != null) {
-                    T data = getSingleSelectedData(position);
-                    singleSelectedCallBack.selected(position, data);
-                }
                 dismiss();
             }
         });
     }
 
-    protected T getSingleSelectedData(int position) {
-        return adapter.getLists().get(position);
+    protected void singleSelected(int position) {
+
     }
 
     protected void initMultiSelectMode() {
         lvData.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
-        vReset = getContentView().findViewById(R.id.vReset);
-        vConfirm = getContentView().findViewById(R.id.vConfirm);
-        if (vReset == null || vConfirm == null) {
-            throw new IllegalArgumentException("In MultiSelect Mode, your contentView must have vReset and vConfirm");
-        }
+
         lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -105,12 +96,26 @@ public abstract class BaseFilterPopupWindow<T> extends PopupWindow {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    public void setvReset(View vReset) {
+        if (vReset == null) {
+            throw new IllegalArgumentException("vReset must not be null");
+        }
+        this.vReset = vReset;
         vReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reset();
             }
         });
+    }
+
+    public void setvConfirm(View vConfirm) {
+        if (vConfirm == null) {
+            throw new IllegalArgumentException("vConfirm must not be null");
+        }
+        this.vConfirm = vConfirm;
         vConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,29 +133,28 @@ public abstract class BaseFilterPopupWindow<T> extends PopupWindow {
     }
 
     protected void confirm() {
-        if (multiSelectedCallBack != null) {
-            multiSelectedCallBack.multiSelected(getMultiSelectedData());
+
+    }
+
+    public boolean isMultiSelect() {
+        return isMultiSelect;
+    }
+
+    public void setIsMultiSelect(boolean isMultiSelect) {
+        this.isMultiSelect = isMultiSelect;
+        initMode();
+    }
+
+    public BaseFilterListAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(BaseFilterListAdapter adapter) {
+        this.adapter = adapter;
+        lvData.setAdapter(this.adapter);
+        if (this.adapter != null) {
+            adapter.setSparseBooleanArray(lvData.getCheckedItemPositions());
         }
-        dismiss();
     }
 
-    protected List<T> getMultiSelectedData() {
-        return new ArrayList<>();
-    }
-
-    public void setMultiSelectedCallBack(MultiSelectedCallBack<T> multiSelectedCallBack) {
-        this.multiSelectedCallBack = multiSelectedCallBack;
-    }
-
-    public void setSingleSelectedCallBack(SingleSelectedCallBack<T> singleSelectedCallBack) {
-        this.singleSelectedCallBack = singleSelectedCallBack;
-    }
-
-    public interface SingleSelectedCallBack<T> {
-        void selected(int position, T data);
-    }
-
-    public interface MultiSelectedCallBack<T> {
-        void multiSelected(List<T> data);
-    }
 }
