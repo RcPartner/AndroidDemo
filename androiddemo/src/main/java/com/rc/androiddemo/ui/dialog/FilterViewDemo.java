@@ -15,7 +15,6 @@ import com.rc.androiddemo.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Description:
@@ -34,14 +33,17 @@ public class FilterViewDemo extends Activity {
         setContentView(R.layout.activity_filter_view);
         initList();
 
-
+        ArrayMap<Integer, Integer> arrayMap = new ArrayMap<>();
+        arrayMap.put(0, 1);
+        arrayMap.put(0, 2);
+        Toast.makeText(this, arrayMap.toString(), Toast.LENGTH_SHORT).show();
         ((FilterTitleView) findViewById(R.id.ftvDemo)).setItemClickListener(
                 new FilterTitleView.OnItemClickListener() {
                     @Override
                     public void onClick(int position, View view) {
                         if (position == 1) {
                             getPopupWindow(view);
-                        }else if (position == 2) {
+                        } else if (position == 2) {
                             getDoubleListPopupWindow(view);
                         }
                     }
@@ -69,8 +71,8 @@ public class FilterViewDemo extends Activity {
         final SingleListPopupWindow w = new SingleListPopupWindow(contentView,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         w.setAdapter(new MyAdapter(this, list));
-        w.setvReset(contentView.findViewById(R.id.vReset));
-        w.setvConfirm(contentView.findViewById(R.id.vConfirm));
+        w.setReset(contentView.findViewById(R.id.vReset));
+        w.setConfirm(contentView.findViewById(R.id.vConfirm));
         w.setOnSingleSelected(new SingleListPopupWindow.OnSingleSelected() {
             @Override
             public void onSingleSelected(int position) {
@@ -93,24 +95,23 @@ public class FilterViewDemo extends Activity {
         View contentView = getLayoutInflater().inflate(R.layout.popup_double_list, null);
         final DoubleListPopupWindow w = new DoubleListPopupWindow(contentView,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        w.setvReset(contentView.findViewById(R.id.vReset));
-        w.setvConfirm(contentView.findViewById(R.id.vConfirm));
+        w.setReset(contentView.findViewById(R.id.vReset));
+        w.setConfirm(contentView.findViewById(R.id.vConfirm));
         w.setLvSecond((ListView) contentView.findViewById(R.id.lvSecond));
         w.setLeftAdapter(new MyAdapter(this, list));
 //        w.setDataList(list2);
         w.setAdapter(new MyAdapter(this));
-        w.setonSelected(new DoubleListPopupWindow.OnSelected() {
+        w.setOnMultiSelected(new DoubleListPopupWindow.OnMultiSelected() {
             @Override
-            public void onSelected(int parentPos, int childPos) {
-                Toast.makeText(FilterViewDemo.this, parentPos + "," + childPos, Toast.LENGTH_SHORT).show();
+            public void onMultiSelected(List<ArrayMap<Integer, Integer>> selectedArray) {
+                Toast.makeText(FilterViewDemo.this, selectedArray.toString(), Toast.LENGTH_SHORT).show();
             }
-
         });
         w.setOnLeftListItemClickListener(new DoubleListPopupWindow.OnLeftListItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 ((MyAdapter) w.getAdapter()).setLists(list2.get(position));
-                w.refreshRightList(position);
+//                w.refreshRightList(position);
             }
         });
         w.showAsDropDown(v);

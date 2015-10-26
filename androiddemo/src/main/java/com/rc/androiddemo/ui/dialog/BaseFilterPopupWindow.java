@@ -9,11 +9,6 @@ import android.widget.PopupWindow;
 
 import com.rc.androiddemo.R;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-
 /**
  * Description:
  * Author: WuRuiqiang(263454190@qq.com)
@@ -98,7 +93,7 @@ public abstract class BaseFilterPopupWindow extends PopupWindow {
         });
     }
 
-    public void setvReset(View vReset) {
+    public void setReset(View vReset) {
         if (vReset == null) {
             throw new IllegalArgumentException("vReset must not be null");
         }
@@ -111,7 +106,7 @@ public abstract class BaseFilterPopupWindow extends PopupWindow {
         });
     }
 
-    public void setvConfirm(View vConfirm) {
+    public void setConfirm(View vConfirm) {
         if (vConfirm == null) {
             throw new IllegalArgumentException("vConfirm must not be null");
         }
@@ -143,6 +138,10 @@ public abstract class BaseFilterPopupWindow extends PopupWindow {
     public void setIsMultiSelect(boolean isMultiSelect) {
         this.isMultiSelect = isMultiSelect;
         initMode();
+    }
+
+    public ListView getLvData() {
+        return lvData;
     }
 
     public BaseFilterListAdapter getAdapter() {

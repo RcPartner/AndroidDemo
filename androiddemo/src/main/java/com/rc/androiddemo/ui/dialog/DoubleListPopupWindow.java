@@ -8,12 +8,8 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.rc.androiddemo.R;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Description:
@@ -26,15 +22,15 @@ public class DoubleListPopupWindow extends BaseFilterPopupWindow {
 
     private SparseArray<SparseBooleanArray> selectArray;
 
-    private ArrayMap<Integer, List<Object>> dataList;
-
     private BaseFilterListAdapter leftAdapter;
 
     private OnLeftListItemClickListener onLeftListItemClickListener;
 
     private OnSelected onSelected;
 
-    private int currentLeftSelected;
+    private OnMultiSelected onMultiSelected;
+
+    public int currentLeftSelected;
 
     public DoubleListPopupWindow(View contentView, int width, int height) {
         this(contentView, width, height, false);
@@ -47,7 +43,6 @@ public class DoubleListPopupWindow extends BaseFilterPopupWindow {
     @Override
     protected void initView(View contentView) {
         super.initView(contentView);
-        dataList = new ArrayMap<>();
         selectArray = new SparseArray<>();
     }
 
@@ -77,6 +72,7 @@ public class DoubleListPopupWindow extends BaseFilterPopupWindow {
         if (onLeftListItemClickListener != null) {
             onLeftListItemClickListener.onItemClick(position);
         }
+        refreshRightList(position);
     }
 
     public void refreshRightList(int position) {
@@ -90,8 +86,6 @@ public class DoubleListPopupWindow extends BaseFilterPopupWindow {
             //更新适配器的属性
             adapter.setSparseBooleanArray(s);
             adapter.notifyDataSetInvalidated();
-        } else {
-            throw new RuntimeException("adapter is null, have you invoke setLeftAdapter() ?");
         }
     }
 
@@ -114,24 +108,26 @@ public class DoubleListPopupWindow extends BaseFilterPopupWindow {
     @Override
     protected void confirm() {
         super.confirm();
-        getMultiSelectedData();
+        if (onMultiSelected != null) {
+            onMultiSelected.onMultiSelected(getMultiSelectedData());
+        }
         dismiss();
     }
 
-    private void  getMultiSelectedData() {
-//        List<Object> data = new ArrayList<>();
-        if (onSelected == null) {
-            return;
-        }
+    private List<ArrayMap<Integer, Integer>>  getMultiSelectedData() {
+        List<ArrayMap<Integer, Integer>> list = new ArrayList<>();
         for (int i = 0; i < selectArray.size(); i++) {
             SparseBooleanArray s = selectArray.get(selectArray.keyAt(i));
             for (int j = 0; j < s.size(); j++) {
                 if (s.get(s.keyAt(j))) {
-                    onSelected.onSelected(i, j);
+                    ArrayMap<Integer, Integer> data = new ArrayMap<>();
+                    data.put(selectArray.keyAt(i), s.keyAt(j));
+                    list.add(data);
 //                    data.add(dataList.get(selectArray.keyAt(i)).get(s.keyAt(j)));
                 }
             }
         }
+        return list;
 //        return data;
     }
 
@@ -156,20 +152,20 @@ public class DoubleListPopupWindow extends BaseFilterPopupWindow {
         }
     }
 
-    public ArrayMap<Integer, List<Object>> getDataList() {
-        return dataList;
+    public ListView getLvSecond() {
+        return lvSecond;
     }
 
-    public void setDataList(ArrayMap<Integer, List<Object>> dataList) {
-        this.dataList = dataList;
-    }
-
-    public void setonSelected(OnSelected onSelected) {
+    public void setOnSelected(OnSelected onSelected) {
         this.onSelected = onSelected;
     }
 
     public void setOnLeftListItemClickListener(OnLeftListItemClickListener onLeftListItemClickListener) {
         this.onLeftListItemClickListener = onLeftListItemClickListener;
+    }
+
+    public void setOnMultiSelected(OnMultiSelected onMultiSelected) {
+        this.onMultiSelected = onMultiSelected;
     }
 
     public interface OnLeftListItemClickListener {
@@ -178,5 +174,9 @@ public class DoubleListPopupWindow extends BaseFilterPopupWindow {
 
     public interface OnSelected {
         void onSelected(int parentPos, int childPos);
+    }
+
+    public interface OnMultiSelected {
+        void onMultiSelected(List<ArrayMap<Integer, Integer>> selectedArray);
     }
 }

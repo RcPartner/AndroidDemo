@@ -85,7 +85,7 @@ public class FilterTitleView extends LinearLayout {
         }
     }
 
-    private TextView getDefaultItemView() {
+    private View getDefaultItemView() {
         TextView tv = new TextView(getContext());
         LayoutParams lp = new LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         tv.setGravity(Gravity.CENTER);
