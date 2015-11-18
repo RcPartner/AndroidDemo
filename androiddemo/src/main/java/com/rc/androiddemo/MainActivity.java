@@ -20,6 +20,7 @@ import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
 import com.rc.androiddemo.resources.drawable.ninepatchfile.NinePatchFileDemo;
 import com.rc.androiddemo.service.ServiceDemo;
 import com.rc.androiddemo.ui.animation.TweenedAnimation;
+import com.rc.androiddemo.ui.animation.object.ObjectAnimationDemo;
 import com.rc.androiddemo.ui.animation.view.tween.AlphaDemo;
 import com.rc.androiddemo.ui.animation.view.tween.AnimationDemo;
 import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
@@ -156,7 +157,8 @@ public class MainActivity extends Activity {
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, PullToRefreshDemo.class,
             ScrollerDemo.class, ServiceDemo.class,  FragmentTabHostDemo.class,
             RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class,
-            RoundProgressViewDemo.class, FilterViewDemo.class, FlowLayoutDemo.class};
+            RoundProgressViewDemo.class, FilterViewDemo.class, FlowLayoutDemo.class,
+            ObjectAnimationDemo.class};
 
     @Override
     protected void onStop() {
