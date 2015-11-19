@@ -8,7 +8,7 @@ package com.rc.androiddemo.ui.pulltorefresh;
 public interface IPullToRefreshCallBack {
     void pullOffsetPercent(float percent);
 
-    void release();
+    void refreshing();
 
     void refreshCompleted();
 }
