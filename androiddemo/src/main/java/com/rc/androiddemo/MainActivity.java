@@ -20,6 +20,7 @@ import com.rc.androiddemo.resources.drawable.layerlist.LayerListDemo;
 import com.rc.androiddemo.resources.drawable.ninepatchfile.NinePatchFileDemo;
 import com.rc.androiddemo.service.ServiceDemo;
 import com.rc.androiddemo.ui.animation.TweenedAnimation;
+import com.rc.androiddemo.ui.animation.object.ObjectAnimationDemo;
 import com.rc.androiddemo.ui.animation.view.tween.AlphaDemo;
 import com.rc.androiddemo.ui.animation.view.tween.AnimationDemo;
 import com.rc.androiddemo.ui.animation.view.tween.RotateDemo;
@@ -27,7 +28,10 @@ import com.rc.androiddemo.ui.animation.view.tween.ScaleDemo;
 import com.rc.androiddemo.ui.animation.view.tween.TranslateDemo;
 import com.rc.androiddemo.ui.dialog.AlertDialogDemo;
 import com.rc.androiddemo.ui.dialog.DialogFragmentDemo;
+import com.rc.androiddemo.ui.dialog.FilterViewDemo;
 import com.rc.androiddemo.ui.edittext.EditTextDemo;
+import com.rc.androiddemo.ui.flowlayout.FlowLayoutDemo;
+import com.rc.androiddemo.ui.progressview.RoundProgressViewDemo;
 import com.rc.androiddemo.ui.pulltorefresh.PullToRefreshDemo;
 import com.rc.androiddemo.ui.ratingbar.RatingBarDemo;
 import com.rc.androiddemo.ui.recyclerview.RcGridDemo;
@@ -152,7 +156,9 @@ public class MainActivity extends Activity {
             WebViewDemo.class, SwitchDemo.class, AlertDialogDemo.class, MVPLoginDemo.class,
             AnimationDemo.class, DialogFragmentDemo.class, TouchEventDemo.class, PullToRefreshDemo.class,
             ScrollerDemo.class, ServiceDemo.class,  FragmentTabHostDemo.class,
-            RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class};
+            RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class,
+            RoundProgressViewDemo.class, FilterViewDemo.class, FlowLayoutDemo.class,
+            ObjectAnimationDemo.class};
 
     @Override
     protected void onStop() {

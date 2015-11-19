@@ -57,4 +57,16 @@
         <item name="android:textOff">"Off"</item>
         <item name="android:textOn">"On"</item>
     </style>
+
+    <declare-styleable name="FilterTitleView">
+        <attr name="dividerWidth" format="dimension" />
+        <attr name="dividerColor" format="color|reference" />
+        <attr name="buttonStyleId" format="integer" />
+        <attr name="items" format="reference" />
+    </declare-styleable>
+
+    <style name="DefaultStyle">
+        <item name="android:windowEnterAnimation">@anim/default_in</item>
+        <item name="android:windowExitAnimation">@anim/default_out</item>
+    </style>
 </resources>
