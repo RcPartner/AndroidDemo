@@ -83,6 +83,8 @@
         <activity android:name=".ui.flowlayout.FlowLayoutDemo" />
         <!-- 属性动画-->
         <activity android:name=".ui.animation.object.ObjectAnimationDemo" />
+        <!-- 控件坐标-->
+        <activity android:name=".ui.viewcoor.ViewCoorDemo" />
 
         <service
             android:name=".service.MyService"

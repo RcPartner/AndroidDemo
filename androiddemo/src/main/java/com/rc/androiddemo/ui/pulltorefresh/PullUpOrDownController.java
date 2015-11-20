@@ -16,10 +16,13 @@ public class PullUpOrDownController implements IPullUpOrDownController {
     public boolean canPullUp(ViewGroup parent, View content) {
         if (content instanceof AbsListView) {
             AbsListView absListView = (AbsListView) content;
-            return absListView.getChildCount() > 0 &&  absListView.getLastVisiblePosition()
-                    == absListView.getAdapter().getCount() - 1 && absListView.getChildAt(
-                    absListView.getLastVisiblePosition() - absListView.getFirstVisiblePosition())
-                    .getBottom() <= parent.getBottom();
+            Rect rect = new Rect();
+            View lastView = absListView.getChildAt(absListView.getLastVisiblePosition() -
+                    absListView.getFirstVisiblePosition());
+            lastView.getGlobalVisibleRect(rect);
+            return absListView.getChildCount() > 0 &&  absListView.getLastVisiblePosition() ==
+                    absListView.getAdapter().getCount() - 1 && lastView.getMeasuredHeight() ==
+                    rect.bottom - rect.top;
         }
         if (content instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) content;

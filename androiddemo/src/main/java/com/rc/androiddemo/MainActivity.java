@@ -42,6 +42,7 @@ import com.rc.androiddemo.ui.switchh.SwitchDemo;
 import com.rc.androiddemo.ui.textview.AutoCompleteTextViewDemo;
 import com.rc.androiddemo.ui.textview.TextViewDemo;
 import com.rc.androiddemo.ui.touchevent.TouchEventDemo;
+import com.rc.androiddemo.ui.viewcoor.ViewCoorDemo;
 import com.rc.androiddemo.ui.webview.WebViewDemo;
 
 import java.io.DataOutputStream;
@@ -158,7 +159,7 @@ public class MainActivity extends Activity {
             ScrollerDemo.class, ServiceDemo.class,  FragmentTabHostDemo.class,
             RcListDemo.class, RcGridDemo.class, RvStaggeredGridDemo.class, AutoCompleteTextViewDemo.class,
             RoundProgressViewDemo.class, FilterViewDemo.class, FlowLayoutDemo.class,
-            ObjectAnimationDemo.class};
+            ObjectAnimationDemo.class, ViewCoorDemo.class};
 
     @Override
     protected void onStop() {
