@@ -42,8 +42,8 @@ public class PullToRefreshDemo extends Activity {
 
         ptrvTest = (PullToRefreshView) findViewById(R.id.ptrvTest);
         ListView lv = (ListView) findViewById(R.id.lvContent);
-        SimpleHeaderView view = new SimpleHeaderView(this);
-        SimpleHeaderView view2 = new SimpleHeaderView(this);
+        SimpleHeaderView view = new SimpleHeaderView(this, ptrvTest);
+        SimpleHeaderView view2 = new SimpleHeaderView(this, ptrvTest);
         ptrvTest.setHeaderView(view);
         ptrvTest.setFooterView(view2);
         adapter = new MyAdapter();
@@ -69,7 +69,7 @@ public class PullToRefreshDemo extends Activity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -90,7 +90,7 @@ public class PullToRefreshDemo extends Activity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -98,7 +98,7 @@ public class PullToRefreshDemo extends Activity {
                     @Override
                     public void run() {
                         datas = datas2;
-                        adapter.notifyDataSetChanged();
+                        adapter.notifyDataSetInvalidated();
                         ptrvTest.refreshComplete();
                     }
                 });

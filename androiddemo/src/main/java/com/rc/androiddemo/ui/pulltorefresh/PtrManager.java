@@ -25,7 +25,7 @@ public class PtrManager {
 
 //    boolean isMoveUp;
 
-    boolean isMoveDown;
+    boolean isDownDirection;
 
     boolean isLoading;
 
@@ -34,7 +34,7 @@ public class PtrManager {
     public void judgePullUpOrDown(float currentY) {
         int offset = (int) (currentY - lastYPos);
 //        isMoveUp = offset < 0;
-        isMoveDown = offset > 0;
+        isDownDirection = offset > 0;
     }
 
     public int moveOffset(float currentY) {
@@ -44,6 +44,10 @@ public class PtrManager {
         totalOffsetYAbs = Math.abs(totalOffsetY);
         isPulling = true;
         return offset;
+    }
+
+    public boolean isMoveDown() {
+        return totalOffsetY < 0;
     }
 
 //    public float getPullOffset() {

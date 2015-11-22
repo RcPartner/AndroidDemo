@@ -1,6 +1,7 @@
 package com.rc.androiddemo.ui.pulltorefresh;
 
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -20,6 +21,13 @@ public class PullUpOrDownController implements IPullUpOrDownController {
             View lastView = absListView.getChildAt(absListView.getLastVisiblePosition() -
                     absListView.getFirstVisiblePosition());
             lastView.getGlobalVisibleRect(rect);
+            if (absListView.getChildCount() > 0 && absListView.getLastVisiblePosition() ==
+                    absListView.getAdapter().getCount() - 1 && lastView.getMeasuredHeight() ==
+                    rect.bottom - rect.top) {
+                Log.d("LastView Height: ", rect.height() + "true");
+            } else {
+                Log.d("LastView Height: ", rect.height() + "false");
+            }
             return absListView.getChildCount() > 0 &&  absListView.getLastVisiblePosition() ==
                     absListView.getAdapter().getCount() - 1 && lastView.getMeasuredHeight() ==
                     rect.bottom - rect.top;

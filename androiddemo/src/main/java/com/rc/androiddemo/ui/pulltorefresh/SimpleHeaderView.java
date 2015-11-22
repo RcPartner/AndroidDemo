@@ -3,6 +3,7 @@ package com.rc.androiddemo.ui.pulltorefresh;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,9 +31,9 @@ public class SimpleHeaderView implements IPullToRefreshCallBack, ICustomRefreshV
 
     private TextView tvComplete;
 
-    public SimpleHeaderView(Context mContext) {
+    public SimpleHeaderView(Context mContext, ViewGroup parent) {
         this.mContext = mContext;
-        vRoot = LayoutInflater.from(mContext).inflate(R.layout.pull_to_refresh_view, null);
+        vRoot = LayoutInflater.from(mContext).inflate(R.layout.pull_to_refresh_view, parent, false);
         llBeforeLoading = (LinearLayout) vRoot.findViewById(R.id.llBeforeLoading);
         tvTest = (TextView) vRoot.findViewById(R.id.tvTest);
         pbProgress = (ProgressBar) vRoot.findViewById(R.id.pbProgress);
