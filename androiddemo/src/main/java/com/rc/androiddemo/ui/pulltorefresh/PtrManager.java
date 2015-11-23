@@ -23,7 +23,7 @@ public class PtrManager {
 
     int releaseDuration = 1000;
 
-//    boolean isMoveUp;
+    boolean isUpDirection;
 
     boolean isDownDirection;
 
@@ -32,9 +32,8 @@ public class PtrManager {
     boolean isPulling;
 
     public void judgePullUpOrDown(float currentY) {
-        int offset = (int) (currentY - lastYPos);
-//        isMoveUp = offset < 0;
-        isDownDirection = offset > 0;
+        isUpDirection = currentY < lastYPos;
+        isDownDirection = currentY > lastYPos;
     }
 
     public int moveOffset(float currentY) {
@@ -44,6 +43,10 @@ public class PtrManager {
         totalOffsetYAbs = Math.abs(totalOffsetY);
         isPulling = true;
         return offset;
+    }
+
+    public int computeOffset(float currentY) {
+        return (int) (currentY - lastYPos);
     }
 
     public boolean isMoveDown() {

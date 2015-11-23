@@ -54,6 +54,7 @@ public class SimpleHeaderView implements IPullToRefreshCallBack, ICustomRefreshV
     @Override
     public void pullOffsetPercent(float percent) {
         if (percent < 1) {
+            tvTest.setText(percent + "");
             pbProgress.setProgress((int) (percent * 100));
         } else {
             tvTest.setText("释放刷新");
