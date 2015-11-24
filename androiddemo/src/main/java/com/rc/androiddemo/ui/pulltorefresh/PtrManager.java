@@ -11,8 +11,6 @@ public class PtrManager {
 
     int mFooterHeight;
 
-    int offsetY;
-
     int totalOffsetY;
 
     int totalOffsetYAbs;
@@ -27,8 +25,6 @@ public class PtrManager {
 
     boolean isDownDirection;
 
-    boolean isLoading;
-
     boolean isPulling;
 
     public void judgePullUpOrDown(float currentY) {
@@ -36,21 +32,27 @@ public class PtrManager {
         isDownDirection = currentY > lastYPos;
     }
 
-    public int moveOffset(float currentY) {
+    public int moveView(float currentY) {
         int offset = (int) ((currentY - lastYPos) * pullOffsetRatio);
         lastYPos   = (int) currentY;
-        totalOffsetY -= offset;
+        if ((totalOffsetY < 0 && totalOffsetY - offset > 0) ||
+                (totalOffsetY > 0 && totalOffsetY - offset < 0)) {
+            offset = totalOffsetY;
+        } else {
+            totalOffsetY -= offset;
+        }
         totalOffsetYAbs = Math.abs(totalOffsetY);
         isPulling = true;
         return offset;
     }
 
-    public int computeOffset(float currentY) {
-        return (int) (currentY - lastYPos);
-    }
-
-    public boolean isMoveDown() {
-        return totalOffsetY < 0;
+    public void reset() {
+        lastYPos = 0;
+        totalOffsetY = 0;
+        totalOffsetYAbs = 0;
+        isDownDirection = false;
+        isUpDirection = false;
+        isPulling = false;
     }
 
 //    public float getPullOffset() {

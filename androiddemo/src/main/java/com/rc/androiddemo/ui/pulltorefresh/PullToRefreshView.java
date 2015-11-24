@@ -209,28 +209,26 @@ public class PullToRefreshView extends ViewGroup {
         switch (action) {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                if (ptrManager.isPulling && ptrManager.totalOffsetY != 0) {
-//                    ptrManager.isPulling = false;
-                    int offset;
-                    if (ptrManager.isMoveDown()) {
+                if (ptrManager.isPulling) {
+                    int offset = 0;
+                    if (ptrManager.isDownDirection) {
                         offset = ptrManager.totalOffsetYAbs > ptrManager.mHeaderHeight ?
                                 ptrManager.totalOffsetY + ptrManager.mHeaderHeight :
                                 ptrManager.totalOffsetY;
-                    } else {
+                    } else if (ptrManager.isUpDirection) {
                         offset = ptrManager.totalOffsetYAbs > ptrManager.mFooterHeight ?
                                 ptrManager.totalOffsetY - ptrManager.mFooterHeight :
                                 ptrManager.totalOffsetY;
                     }
                     release(ptrManager.totalOffsetY, offset);
-                    if (ptrManager.isMoveDown() && ptrManager.totalOffsetYAbs > ptrManager.mHeaderHeight
+                    if (ptrManager.isDownDirection && ptrManager.totalOffsetYAbs > ptrManager.mHeaderHeight
                             && onRefreshListener != null) {
                         onRefreshListener.onRefresh();
 
                         if (headerCallBack != null) {
                             headerCallBack.refreshing();
                         }
-                    }
-                    if (!ptrManager.isMoveDown() && ptrManager.totalOffsetYAbs >
+                    } else if (ptrManager.isUpDirection && ptrManager.totalOffsetYAbs >
                             ptrManager.mFooterHeight && onLoadMoreListener != null) {
                         onLoadMoreListener.onLoadMore();
 
@@ -242,38 +240,18 @@ public class PullToRefreshView extends ViewGroup {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                ptrManager.judgePullUpOrDown(ev.getY());
-//                if (ptrManager.isDownDirection && iPullUpOrDownController.canPullDown(this, contentView) ||
-//                        ptrManager.isUpDirection && iPullUpOrDownController.canPullUp(this, contentView)) {
-//                    int offset = ptrManager.moveOffset(ev.getY());
-//                    Log.d(TAG, "totalOffsetY : " + ptrManager.totalOffsetY);
-//                    updatePos(offset);
-//                    bool = true;
-//                }else if () {
-//                }
-                if ((!ptrManager.isDownDirection && iPullUpOrDownController.canPullUp(this, contentView)) ||
-                        (getScrollY() < 0 && ptrManager.isPulling && !ptrManager.isDownDirection) ||
+                if (!ptrManager.isPulling) {
+                    ptrManager.judgePullUpOrDown(ev.getY());
+                }
+
+                if ((ptrManager.isUpDirection && iPullUpOrDownController.canPullUp(this, contentView)) ||
                         (ptrManager.isDownDirection && iPullUpOrDownController.canPullDown(this, contentView)) ||
-                        (getScrollY() > 0 && ptrManager.isPulling && ptrManager.isDownDirection)) {
-                    if (getScrollY() - ptrManager.computeOffset(ev.getY()) > 0 &&
-                            ptrManager.isPulling && !ptrManager.isDownDirection) {
-                        ev.setLocation(ev.getX(), ptrManager.lastYPos - ptrManager.computeOffset(ev.getY()));
-                    }
-                    if (getScrollY() - ptrManager.computeOffset(ev.getY()) < 0 &&
-                            ptrManager.isPulling && ptrManager.isDownDirection) {
-                        ev.setLocation(ev.getX(), ptrManager.lastYPos + ptrManager.computeOffset(ev.getY()));
-                    }
-                    int offset = ptrManager.moveOffset(ev.getY());
+                        ptrManager.isPulling) {
+                    int offset = ptrManager.moveView(ev.getY());
                     Log.d(TAG, "totalOffsetY : " + ptrManager.totalOffsetY);
                     updatePos(offset);
                     bool = true;
                 }
-//                if ((!ptrManager.isMoveDown && (iPullUpOrDownController.canPullUp(this, contentView) ||
-//                        getScrollY() < 0) || ptrManager.isPulling || (ptrManager.isMoveDown && iPullUpOrDownController
-//                        .canPullDown(this, contentView)))) {
-//                    int offset = ptrManager.moveOffset(ev.getY());
-//                    updatePos(offset);
-//                }
                 break;
             case MotionEvent.ACTION_DOWN:
                 ptrManager.lastYPos = (int) ev.getY();
@@ -289,11 +267,14 @@ public class PullToRefreshView extends ViewGroup {
 //        contentView.offsetTopAndBottom(offsetY);
         scrollBy(0, -offsetY);
         invalidate();
-        if (ptrManager.isMoveDown() && headerCallBack != null) {
+        if (offsetY == ptrManager.totalOffsetY) {
+            reset();
+        }
+        if (ptrManager.isDownDirection && headerCallBack != null) {
             headerCallBack.pullOffsetPercent((float) ptrManager.totalOffsetYAbs /
                     (ptrManager.mHeaderHeight));
         }
-        if (!ptrManager.isMoveDown() && footerCallBack != null) {
+        if (ptrManager.isUpDirection && footerCallBack != null) {
             footerCallBack.pullOffsetPercent((float) ptrManager.totalOffsetYAbs
                     / (ptrManager.mFooterHeight));
         }
@@ -319,10 +300,8 @@ public class PullToRefreshView extends ViewGroup {
     }
 
     private void reset() {
-        ptrManager.totalOffsetY = 0;
-        ptrManager.totalOffsetYAbs = 0;
-        ptrManager.isPulling = false;
         isRelease = false;
+        ptrManager.reset();
     }
 
     private boolean dispatchTouchEventSupper(MotionEvent ev) {

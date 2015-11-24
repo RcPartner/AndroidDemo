@@ -53,8 +53,13 @@ public class SimpleHeaderView implements IPullToRefreshCallBack, ICustomRefreshV
 
     @Override
     public void pullOffsetPercent(float percent) {
+        if (llBeforeLoading.getVisibility() == View.GONE) {
+            llBeforeLoading.setVisibility(View.VISIBLE);
+            tvComplete.setVisibility(View.GONE);
+            pbLoading.setVisibility(View.GONE);
+        }
         if (percent < 1) {
-            tvTest.setText(percent + "");
+            tvTest.setText("拉动刷新");
             pbProgress.setProgress((int) (percent * 100));
         } else {
             tvTest.setText("释放刷新");

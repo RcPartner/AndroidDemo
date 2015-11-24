@@ -4,8 +4,7 @@
     android:layout_height="60dp"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:padding="10dp"
-    android:background="@android:color/holo_orange_light">
+    android:padding="10dp">
 
     <LinearLayout
         android:id="@+id/llBeforeLoading"
@@ -25,15 +24,14 @@
             android:layout_height="10dp"
             android:layout_marginTop="5dp"
             android:max="100"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:background="@android:color/holo_blue_light"/>
+            style="?android:attr/progressBarStyleHorizontal"/>
     </LinearLayout>
 
     <ProgressBar
         android:id="@+id/pbLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleSmall"
+        style="?android:attr/progressBarStyleLarge"
         android:visibility="gone"/>
 
     <TextView
