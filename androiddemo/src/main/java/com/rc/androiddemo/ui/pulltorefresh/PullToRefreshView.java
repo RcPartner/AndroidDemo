@@ -165,7 +165,7 @@ public class PullToRefreshView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        if (isRelease) {
+        if (ptrManager.isPulling) {
             return;
         }
         int paddingLeft = getPaddingLeft();
@@ -174,9 +174,9 @@ public class PullToRefreshView extends ViewGroup {
         if (headerView != null) {
             MarginLayoutParams lp = (MarginLayoutParams) headerView.getLayoutParams();
             int left = paddingLeft + lp.leftMargin;
-            int right = left + headerView.getMeasuredWidth();
+            int right = left + headerView.getMeasuredWidth() - lp.rightMargin;
             int top = paddingTop + lp.topMargin - ptrManager.mHeaderHeight;
-            int bottom = top + headerView.getMeasuredHeight();
+            int bottom = top + headerView.getMeasuredHeight() - lp.bottomMargin;
             headerView.layout(left, top, right, bottom);
             Log.d(this.getClass().getSimpleName(), "-------headerView : " + left + "," + top + "," + right + "," + bottom);
         }
@@ -184,19 +184,19 @@ public class PullToRefreshView extends ViewGroup {
         if (contentView != null) {
             MarginLayoutParams lp = (MarginLayoutParams) contentView.getLayoutParams();
             int left = paddingLeft + lp.leftMargin;
-            int right = left + contentView.getMeasuredWidth();
-            int top = paddingTop + lp.topMargin;
-            int bottom = top + contentView.getMeasuredHeight();
+            int right = left + contentView.getMeasuredWidth() - lp.rightMargin;
+            int top = lp.topMargin;
+            int bottom = top + contentView.getMeasuredHeight() - lp.bottomMargin;
             contentView.layout(left, top, right, bottom);
-            Log.d(this.getClass().getSimpleName(), "-------contentView : " + contentView.getMeasuredHeight() + ",  " + getBottom());
+            Log.d(this.getClass().getSimpleName(), "-------contentView : " + left + "," + top + "," + right + "," + bottom);
         }
 
         if (footerView != null && contentView != null) {
             MarginLayoutParams lp = (MarginLayoutParams) footerView.getLayoutParams();
             int left = paddingLeft + lp.leftMargin;
-            int right = left + footerView.getMeasuredWidth();
-            int top = paddingTop + lp.topMargin + contentView.getBottom();
-            int bottom = top + ptrManager.mFooterHeight;
+            int right = left + footerView.getMeasuredWidth() - lp.rightMargin;
+            int top = lp.topMargin + contentView.getBottom();
+            int bottom = top + ptrManager.mFooterHeight - lp.bottomMargin;
             footerView.layout(left, top, right, bottom);
             Log.d(this.getClass().getSimpleName(), "-------footerView : " + left + "," + top + "," + right + "," + bottom);
         }
@@ -221,19 +221,22 @@ public class PullToRefreshView extends ViewGroup {
                                 ptrManager.totalOffsetY;
                     }
                     release(ptrManager.totalOffsetY, offset);
-                    if (ptrManager.isDownDirection && ptrManager.totalOffsetYAbs > ptrManager.mHeaderHeight
-                            && onRefreshListener != null) {
-                        onRefreshListener.onRefresh();
-
-                        if (headerCallBack != null) {
-                            headerCallBack.refreshing();
-                        }
-                    } else if (ptrManager.isUpDirection && ptrManager.totalOffsetYAbs >
-                            ptrManager.mFooterHeight && onLoadMoreListener != null) {
-                        onLoadMoreListener.onLoadMore();
-
-                        if (footerCallBack != null) {
-                            footerCallBack.refreshing();
+                    ptrManager.totalOffsetY = offset;
+                    if (!ptrManager.isLoading) {
+                        if (ptrManager.isDownDirection && ptrManager.totalOffsetYAbs > ptrManager.mHeaderHeight
+                                && onRefreshListener != null) {
+                            onRefreshListener.onRefresh();
+                            ptrManager.isLoading = true;
+                            if (headerCallBack != null) {
+                                headerCallBack.refreshing();
+                            }
+                        } else if (ptrManager.isUpDirection && ptrManager.totalOffsetYAbs >
+                                ptrManager.mFooterHeight && onLoadMoreListener != null) {
+                            onLoadMoreListener.onLoadMore();
+                            ptrManager.isLoading = true;
+                            if (footerCallBack != null) {
+                                footerCallBack.refreshing();
+                            }
                         }
                     }
                     bool = true;
@@ -243,11 +246,10 @@ public class PullToRefreshView extends ViewGroup {
                 if (!ptrManager.isPulling) {
                     ptrManager.judgePullUpOrDown(ev.getY());
                 }
-
-                if ((ptrManager.isUpDirection && iPullUpOrDownController.canPullUp(this, contentView)) ||
-                        (ptrManager.isDownDirection && iPullUpOrDownController.canPullDown(this, contentView)) ||
-                        ptrManager.isPulling) {
-                    int offset = ptrManager.moveView(ev.getY());
+                int offset = ptrManager.fingerMove(ev.getY());
+                if ((ptrManager.isUpDirection && iPullUpOrDownController.canPullUp(this, contentView) && ptrManager.totalOffsetY <= 0) ||
+                        (ptrManager.isDownDirection && iPullUpOrDownController.canPullDown(this, contentView) && ptrManager.totalOffsetY >= 0)) {
+                    ptrManager.moveView(offset);
                     Log.d(TAG, "totalOffsetY : " + ptrManager.totalOffsetY);
                     updatePos(offset);
                     bool = true;
@@ -263,20 +265,25 @@ public class PullToRefreshView extends ViewGroup {
 
     private void updatePos(int offsetY) {
         //亦可通过以下两个方法实现视图跟随手指滑动偏移效果
-//        headerView.offsetTopAndBottom(offsetY);
-//        contentView.offsetTopAndBottom(offsetY);
-        scrollBy(0, -offsetY);
-        invalidate();
-        if (offsetY == ptrManager.totalOffsetY) {
-            reset();
+        headerView.offsetTopAndBottom(offsetY);
+        contentView.offsetTopAndBottom(offsetY);
+        footerView.offsetTopAndBottom(offsetY);
+//        scrollBy(0, -offsetY);
+//        invalidate();
+        if (!ptrManager.isLoading) {
+
+            if (ptrManager.isDownDirection && headerCallBack != null) {
+                headerCallBack.pullOffsetPercent((float) ptrManager.totalOffsetYAbs /
+                        (ptrManager.mHeaderHeight));
+            }
+            if (ptrManager.isUpDirection && footerCallBack != null) {
+                footerCallBack.pullOffsetPercent((float) ptrManager.totalOffsetYAbs
+                        / (ptrManager.mFooterHeight));
+            }
         }
-        if (ptrManager.isDownDirection && headerCallBack != null) {
-            headerCallBack.pullOffsetPercent((float) ptrManager.totalOffsetYAbs /
-                    (ptrManager.mHeaderHeight));
-        }
-        if (ptrManager.isUpDirection && footerCallBack != null) {
-            footerCallBack.pullOffsetPercent((float) ptrManager.totalOffsetYAbs
-                    / (ptrManager.mFooterHeight));
+        if (ptrManager.reachBottom) {
+            ptrManager.totalOffsetY = 0;
+            ptrManager.totalOffsetYAbs = 0;
         }
     }
 
@@ -290,6 +297,9 @@ public class PullToRefreshView extends ViewGroup {
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             invalidate();
         }else {
+            if (getScrollY() == 0 && ptrManager.isLoading) {
+                ptrManager.isLoading = false;
+            }
             if (isRelease) {
                 reset();
                 Log.v(this.getClass().getSimpleName(), "-------current header height is : " + (headerView.getBottom() - getScrollY()));
@@ -317,7 +327,7 @@ public class PullToRefreshView extends ViewGroup {
         }
         switch (action) {
             case MotionEvent.ACTION_MOVE:
-                intercept = (!ptrManager.isDownDirection && iPullUpOrDownController.canPullUp(this, contentView)) ||
+                intercept = (ptrManager.isUpDirection && iPullUpOrDownController.canPullUp(this, contentView)) ||
                         (ptrManager.isDownDirection && iPullUpOrDownController.canPullDown(this, contentView));
                 break;
             case MotionEvent.ACTION_DOWN:
@@ -342,6 +352,7 @@ public class PullToRefreshView extends ViewGroup {
     }
 
     public void refreshComplete() {
+//        ptrManager.isLoading = false;
         release(-ptrManager.mHeaderHeight, -ptrManager.mHeaderHeight);
         if (headerCallBack != null) {
             headerCallBack.refreshCompleted();
@@ -349,6 +360,7 @@ public class PullToRefreshView extends ViewGroup {
     }
 
     public void loadMoreComplete() {
+//        ptrManager.isLoading = false;
         release(ptrManager.mFooterHeight, ptrManager.mFooterHeight);
         if (footerCallBack != null) {
             footerCallBack.refreshCompleted();
@@ -388,5 +400,17 @@ public class PullToRefreshView extends ViewGroup {
 
     public interface OnLoadMoreListener {
         void onLoadMore();
+    }
+
+    class ScrollerRunnable implements Runnable {
+
+        private Scroller mScroller;
+
+        private int lastScrollPos;
+
+        @Override
+        public void run() {
+
+        }
     }
 }

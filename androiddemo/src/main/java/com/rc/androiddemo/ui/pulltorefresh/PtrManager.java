@@ -13,6 +13,8 @@ public class PtrManager {
 
     int totalOffsetY;
 
+    int fingerOffsetY;
+
     int totalOffsetYAbs;
 
     int lastYPos;
@@ -27,23 +29,32 @@ public class PtrManager {
 
     boolean isPulling;
 
+    boolean isLoading;
+
+    boolean reachBottom;
+
     public void judgePullUpOrDown(float currentY) {
         isUpDirection = currentY < lastYPos;
         isDownDirection = currentY > lastYPos;
     }
 
-    public int moveView(float currentY) {
+    public int fingerMove(float currentY) {
         int offset = (int) ((currentY - lastYPos) * pullOffsetRatio);
-        lastYPos   = (int) currentY;
-        if ((totalOffsetY < 0 && totalOffsetY - offset > 0) ||
-                (totalOffsetY > 0 && totalOffsetY - offset < 0)) {
+        if ((isDownDirection && totalOffsetY - offset > 0) ||
+                (isUpDirection && totalOffsetY - offset < 0)) {
             offset = totalOffsetY;
+            reachBottom = true;
         } else {
-            totalOffsetY -= offset;
+            reachBottom = false;
         }
+        lastYPos = (int) currentY;
+        return offset;
+    }
+
+    public void moveView(int offset) {
+        totalOffsetY += offset;
         totalOffsetYAbs = Math.abs(totalOffsetY);
         isPulling = true;
-        return offset;
     }
 
     public void reset() {
@@ -53,6 +64,8 @@ public class PtrManager {
         isDownDirection = false;
         isUpDirection = false;
         isPulling = false;
+//        isLoading = false;
+        reachBottom = false;
     }
 
 //    public float getPullOffset() {

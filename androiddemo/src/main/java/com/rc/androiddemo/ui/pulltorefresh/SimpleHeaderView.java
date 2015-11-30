@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.rc.androiddemo.R;
+import com.rc.androiddemo.ui.progressview.RoundProgressView;
 
 /**
  * Description:
@@ -25,7 +26,7 @@ public class SimpleHeaderView implements IPullToRefreshCallBack, ICustomRefreshV
 
     private TextView tvTest;
 
-    private ProgressBar pbProgress;
+    private RoundProgressView rpvProgress;
 
     private ProgressBar pbLoading;
 
@@ -36,8 +37,9 @@ public class SimpleHeaderView implements IPullToRefreshCallBack, ICustomRefreshV
         vRoot = LayoutInflater.from(mContext).inflate(R.layout.pull_to_refresh_view, parent, false);
         llBeforeLoading = (LinearLayout) vRoot.findViewById(R.id.llBeforeLoading);
         tvTest = (TextView) vRoot.findViewById(R.id.tvTest);
-        pbProgress = (ProgressBar) vRoot.findViewById(R.id.pbProgress);
+        rpvProgress = (RoundProgressView) vRoot.findViewById(R.id.rpvProgress);
         pbLoading = (ProgressBar) vRoot.findViewById(R.id.pbLoading);
+
         tvComplete = (TextView) vRoot.findViewById(R.id.tvComplete);
     }
 
@@ -60,7 +62,7 @@ public class SimpleHeaderView implements IPullToRefreshCallBack, ICustomRefreshV
         }
         if (percent < 1) {
             tvTest.setText("拉动刷新");
-            pbProgress.setProgress((int) (percent * 100));
+            rpvProgress.setProgress((int) (percent * 100));
         } else {
             tvTest.setText("释放刷新");
         }
