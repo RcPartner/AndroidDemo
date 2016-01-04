@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.ScrollView;
 
 /**
  * Description:
@@ -31,13 +32,20 @@ public class PullUpOrDownController implements IPullUpOrDownController {
             return absListView.getChildCount() > 0 &&  absListView.getLastVisiblePosition() ==
                     absListView.getAdapter().getCount() - 1 && lastView.getMeasuredHeight() ==
                     rect.bottom - rect.top;
-        }
-        if (content instanceof ViewGroup) {
+        } else if (content instanceof ScrollView) {
+            ScrollView scrollView = (ScrollView) content;
+            View childView = scrollView.getChildAt(0);
+            return scrollView.getScrollY() + childView.getHeight() == childView.getMeasuredHeight();
+        }else if (content instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) content;
             Rect rect = new Rect();
             viewGroup.getGlobalVisibleRect(rect);
-            return viewGroup.getScrollY() >= (viewGroup.getMeasuredHeight() - rect.height());
+            return viewGroup.getScrollY() >= (viewGroup.getMeasuredHeight() -
+                    rect.height() -
+                    viewGroup.getPaddingTop() -
+                    viewGroup.getPaddingBottom());
         }
+
         return false;
     }
 
@@ -47,8 +55,9 @@ public class PullUpOrDownController implements IPullUpOrDownController {
             AbsListView absListView = (AbsListView) content;
             return absListView.getChildCount() > 0 && absListView.getFirstVisiblePosition() == 0 &&
                     absListView.getChildAt(0).getTop() >= 0;
-        }
-        if (content instanceof ViewGroup) {
+        } else if (content instanceof ScrollView) {
+            return content.getScrollY() == 0;
+        } else if (content instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) content;
             return viewGroup.getChildCount() > 0 && viewGroup.getChildAt(0).getTop() >= 0;
         }
