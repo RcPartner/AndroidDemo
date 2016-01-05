@@ -2,6 +2,8 @@ package com.rc.androiddemo.ui.multipagescrollerlayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
@@ -22,6 +24,8 @@ public class MultiPageScrollerLayout extends ViewGroup {
 
     private IPullUpOrDownController pullUpOrDownController;
 
+    private GestureDetector mGestureDetector;
+
     public MultiPageScrollerLayout(Context context) {
         this(context, null);
     }
@@ -34,6 +38,27 @@ public class MultiPageScrollerLayout extends ViewGroup {
         super(context, attrs, defStyleAttr);
         mScroller = new Scroller(context);
         pullUpOrDownController = new PullUpOrDownController();
+        mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                if (distanceY >= 0 && pullUpOrDownController.canPullUp(MultiPageScrollerLayout.this,
+                        getChildAt(currentPageIndex))) {
+
+                }
+                return super.onScroll(e1, e2, distanceX, distanceY);
+            }
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
@@ -58,5 +83,13 @@ public class MultiPageScrollerLayout extends ViewGroup {
         }
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return super.onInterceptTouchEvent(ev);
+    }
 }

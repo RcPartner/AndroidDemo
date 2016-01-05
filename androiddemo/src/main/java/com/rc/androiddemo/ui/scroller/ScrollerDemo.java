@@ -23,6 +23,6 @@ public class ScrollerDemo extends Activity {
     public void click(View view) {
         TextView tv = (TextView) findViewById(R.id.tvTest);
         ScrollerLinearLayout sll = (ScrollerLinearLayout) findViewById(R.id.sll);
-        tv.setText(sll.getLeft() + ", " + sll.getTop() + ", " + sll.getRight() + ", " + sll.getBottom());
+        tv.setText(sll.getLeft() + ", " + sll.getTop() + ", " + sll.getRight() + ", " + sll.getBottom() + sll.getScrollY());
     }
 }

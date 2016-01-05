@@ -40,7 +40,7 @@ public class ScrollerLinearLayout  extends LinearLayout{
             public void onClick(View v) {
                 log();
                 log2();
-                btn.offsetTopAndBottom(200);
+                offsetTopAndBottom(-200);
 //                mScroller.startScroll(0, 200, 0, 100, 3000);
 //                invalidate();
             }
